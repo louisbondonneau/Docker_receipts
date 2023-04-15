@@ -8,7 +8,7 @@ RUN apt -y install autotools-dev autoconf
 RUN apt -y install libtool make g++ gfortran
 RUN apt -y install libfftw3-dev pgplot5
 RUN apt -y install python3-pip
-RUN pip3 install matplotlib astropy astroplan scipy
+RUN pip3 install matplotlib astropy astroplan scipy tinydb lmfit pyfits --user 
 
 ENV HOME=/home/root
 ENV PSRHOME=/home/root/pulsar
@@ -17,7 +17,7 @@ ENV PSRHOME=/home/root/pulsar
 RUN apt -y install python2.7 -y && \
     curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py && \
     python2.7 get-pip.py && \
-    pip2 install matplotlib astropy astroplan scipy tinydb lmfit && \
+    pip2 install matplotlib astropy astroplan scipy tinydb lmfit pyfits --user && \
     mkdir $HOME/pulsar
 
 RUN echo 'export PSRHOME=$HOME/pulsar' >> ~/.bashrc
@@ -31,8 +31,8 @@ RUN echo 'export PSRCAT_FILE=$PSRHOME/psrcat/psrcat.db' >> ~/.bashrc
 RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PSRHOME/lib' >> ~/.bashrc
 RUN echo 'export C_INCLUDE_PATH=$C_INCLUDE_PATH:$PSRHOME/include' >> ~/.bashrc
 RUN echo 'export PSRCHIVE_CONFIG=$HOME/.psrchive.cfg' >> ~/.bashrc
-RUN echo 'export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:/PYTHONPATH' >> ~/.bashrc
-RUN echo '#PYTHONPATH=$HOME/.local/lib/python3.8/site-packages:/PYTHONPATH' >> ~/.bashrc
+RUN echo '# export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:/$PYTHONPATH' >> ~/.bashrc
+RUN echo '# export PYTHONPATH=$HOME/.local/lib/python3.8/site-packages:/$PYTHONPATH' >> ~/.bashrc
 
 # export TEMPO2=$PSRHOME/src/tempo2/T2runtime
 # export TEMPO2=/home/pulsar/tempo2
@@ -46,6 +46,7 @@ RUN cd $HOME/pulsar && \
 RUN apt-get install -y csh swig python2-dev
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get update
 RUN apt-get install -y python-tk
 RUN apt-get install -y pkg-config
 
@@ -118,7 +119,7 @@ RUN su root && \
     make
 
 RUN cd $PSRHOME/presto/python && \
-    pip2 install ./
+    pip2 install ./  --user 
 
 # lancez le serveur X11 avec :
 # open -a XQuartz
@@ -127,11 +128,3 @@ RUN cd $PSRHOME/presto/python && \
 # lancer le conteneur Docker avec :
 # docker run -it --env="DISPLAY=host.docker.internal:0" psrchive-docker /bin/bash
 # ce qui peut prendre du temps la première fois à cause du téléchargement de l'image.
-
-#  ubuntu 22.04
-# RUN cd $HOME/pulsar && \
-#     wget http://archive.ubuntu.com/ubuntu/pool/universe/c/cfitsio/libcfitsio10_4.2.0-3_amd64.deb && \
-#     wget http://archive.ubuntu.com/ubuntu/pool/universe/c/cfitsio/libcfitsio-dev_4.2.0-3_amd64.deb && \
-#     dpkg -i libcfitsio10_4.2.0-3_amd64.deb && \
-#     dpkg -i libcfitsio-dev_4.2.0-3_amd64.deb
-# 
