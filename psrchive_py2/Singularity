@@ -112,7 +112,7 @@ From: ubuntu:20.04
         make prep && \
         make
 
-    cd $PRESTO && \
+    cd $PRESTO/python && \
         pip2 install ./
 
 
