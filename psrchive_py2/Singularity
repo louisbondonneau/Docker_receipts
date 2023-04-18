@@ -110,7 +110,7 @@ From: ubuntu:20.04
 %post
     apt-get install -y libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
 
-    su root && \
+    . /home/root/.bashrc && \
         cd $PSRHOME && \
         git clone -b v2.2maint https://github.com/scottransom/presto presto && \
         cd $PRESTO/src && \
