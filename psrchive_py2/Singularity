@@ -96,6 +96,7 @@ From: ubuntu:20.04
 
 %post
     cd $PSRHOME
+    rm -r tempo || true
     git clone https://github.com/nanograv/tempo
     cd tempo
     ./prepare
@@ -113,7 +114,7 @@ From: ubuntu:20.04
     apt-get install -y libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
     . /home/root/.bashrc
     cd $PSRHOME
-    git clone -b v2.2maint https://github.com/scottransom/presto presto
+    git clone -b v2.2maint https://github.com/scottransom/presto
     cd presto/src
     make makewisdom
     make clean
