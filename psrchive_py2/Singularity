@@ -12,27 +12,33 @@ From: ubuntu:20.04
     export HOME=/home/root
     export PSRHOME=/home/root/pulsar
 
+    mkdir -p $PSRHOME
+
     apt -y install python2.7 -y
     curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
     python2.7 get-pip.py
     pip2 install numpy matplotlib astropy astroplan scipy tinydb lmfit --user
     pip2 install pyfits --user
-    mkdir $HOME/pulsar || true
 
     ln -s /usr/bin/python2.7 /usr/bin/python
 
-    mkdir -p $PSRHOME
-    echo 'export PSRHOME=$HOME/pulsar' >> ~/.bashrc
-    echo 'export PATH=${PATH}:$PSRHOME/bin' >> ~/.bashrc
-    echo 'export PGPLOT_DIR=/usr/lib/pgplot5' >> ~/.bashrc
-    echo 'export PGPLOT_FONT=$PGPLOT_DIR/grfont.dat' >> ~/.bashrc
-    echo 'export TEMPO2=$PSRHOME/tempo2' >> ~/.bashrc
-    echo 'export PATH=$TEMPO2/bin:$PATH' >> ~/.bashrc
-    echo 'export PSRCAT_FILE=$PSRHOME/psrcat/psrcat.db' >> ~/.bashrc
-    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PSRHOME/lib' >> ~/.bashrc
-    echo 'export C_INCLUDE_PATH=$C_INCLUDE_PATH:$PSRHOME/include' >> ~/.bashrc
-    echo 'export PSRCHIVE_CONFIG=$HOME/.psrchive.cfg' >> ~/.bashrc
+%environment
+    export HOME=/home/root
+    export PSRHOME=/home/root/pulsar
+    export PGPLOT_DIR=/usr/lib/pgplot5
+    export PGPLOT_FONT="$PGPLOT_DIR"/grfont.dat
+    export PRESTO="$PSRHOME"/presto
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":"$PSRHOME"/lib:"$PRESTO"/lib
+    export C_INCLUDE_PATH="$C_INCLUDE_PATH":"$PSRHOME"/include
+    export PATH="$PATH":$PRESTO/bin
+    export TEMPO2="$PSRHOME"/tempo2
+    export TEMPO="$PSRHOME"/tempo
+    export PSRCAT_FILE="$PSRHOME"/psrcat/psrcat.db
+    export PSRCHIVE_CONFIG="$HOME"/.psrchive.cfg
+    export PATH=${PATH}:"$PSRHOME"/bin:"$TEMPO2"/bin
+    export PYTHONPATH="$HOME"/.local/lib/python2.7/site-packages:$PYTHONPATH:$PRESTO/lib/python
 
+%post
     cd $HOME/pulsar && \
         wget http://ftp.debian.org/debian/pool/main/c/cfitsio/libcfitsio9_3.490-3_amd64.deb && \
         wget http://ftp.br.debian.org/debian/pool/main/c/cfitsio/libcfitsio-dev_3.490-3_amd64.deb && \
@@ -45,14 +51,6 @@ From: ubuntu:20.04
     apt-get update
     apt-get install -y python-tk
     apt-get install -y pkg-config
-
-%environment
-    export HOME=/home/root
-    export PSRHOME=/home/root/pulsar
-    export PRESTO=$PSRHOME/presto
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":$PSRHOME/lib:$PRESTO/lib
-    export PATH="$PATH":$PRESTO/bin
-    export PYTHONPATH="$PYTHONPATH":$PRESTO/lib/python
 
 %post
     cd $PSRHOME && \
@@ -79,7 +77,6 @@ From: ubuntu:20.04
         make -j 6 && \
         make install
 
-    echo 'export TEMPO=$PSRHOME/tempo' >> ~/.bashrc
     cd $PSRHOME && \
         git clone https://github.com/nanograv/tempo && \
         cd tempo && \
@@ -98,10 +95,6 @@ From: ubuntu:20.04
     cd $PSRHOME && \
         git clone https://github.com/scottransom/presto presto && \
         cd $PSRHOME/presto/ && \
-        echo 'export PRESTO=$PSRHOME/presto' >> ~/.bashrc && \
-        echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PSRHOME/lib:$PRESTO/lib' >> ~/.bashrc && \
-        echo 'export PATH=${PATH}:$PRESTO/bin' >> ~/.bashrc && \
-        echo 'export PYTHONPATH=${PYTHONPATH}:$PRESTO/lib/python' >> ~/.bashrc
 
     su root && \
         . /home/root/.bashrc && \
