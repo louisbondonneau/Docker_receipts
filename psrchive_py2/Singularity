@@ -96,8 +96,8 @@ From: ubuntu:20.04
 
 %post
     cd $PSRHOME
-    git clone https://github.com/nanograv/tempo
-    cd $PSRHOME/tempo && \
+    git clone https://github.com/nanograv/tempo tempo
+    cd $TEMPO && \
         ./prepare && \
         ./configure && \
         make && \
