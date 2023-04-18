@@ -56,6 +56,7 @@ From: ubuntu:20.04
 
 %post
     . /home/root/.bashrc
+    cd $PSRHOME
     git clone -b v2.2maint https://github.com/scottransom/presto presto
     cd presto/src
     make makewisdom
