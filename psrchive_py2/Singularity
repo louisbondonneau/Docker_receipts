@@ -95,9 +95,9 @@ From: ubuntu:20.04
 #         make install
 
 %post
-    cd $PSRHOME && \
-        git clone https://github.com/nanograv/tempo && \
-        cd tempo && \
+    cd $PSRHOME
+    git clone https://github.com/nanograv/tempo
+    cd $PSRHOME/tempo && \
         ./prepare && \
         ./configure && \
         make && \
