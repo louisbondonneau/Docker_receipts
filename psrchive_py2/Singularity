@@ -96,12 +96,12 @@ From: ubuntu:20.04
 
 %post
     cd $PSRHOME
-    git clone https://github.com/nanograv/tempo tempo
-    cd $TEMPO && \
-        ./prepare && \
-        ./configure && \
-        make && \
-        make install
+    git clone https://github.com/nanograv/tempo
+    cd tempo
+    ./prepare
+    ./configure
+    make
+    make install
 
     echo '/home/root/pulsar/lib/python2.7/site-packages' > /home/root/.local/lib/python2.7/site-packages/mymodule.pth
 
