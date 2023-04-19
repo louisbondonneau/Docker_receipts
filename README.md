@@ -8,9 +8,11 @@ Depending on the installation singularity executable can be named "singularity" 
 
 Run a contaner
 --------------
-
+With psrchive and presto2.2 working under python2.7 + tempo2 + tempo1 + dspsr
 > singularity shell -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep /cep/lofar/pulsar/Singularity/pschive_py2.sif
 
+With psrchive and presto working under python3.8 + tempo2 + tempo1 + dspsr + nenupy + AntPat + dreamBeam
+> singularity shell -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep /cep/lofar/pulsar/Singularity/pschive_py3.sif
 
 Build a container from nothing
 ------------------------------
