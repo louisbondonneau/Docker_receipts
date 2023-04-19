@@ -1,6 +1,11 @@
 Bootstrap: docker
 From: ubuntu:20.04
 
+%files
+    tempo_config/observatories.dat
+    tempo_config/obsys.dat
+    tempo_config/psrchive.cfg
+
 %post
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -126,13 +131,10 @@ From: ubuntu:20.04
     cd $PRESTO/python && \
         pip2 install ./ --user
 
-
-%files
-    tempo_config/observatories.dat /home/root/pulsar/tempo2/observatory/observatories.dat
-    tempo_config/obsys.dat /home/root/pulsar/tempo/obsys.dat
-    tempo_config/psrchive.cfg /home/root/.psrchive.cfg
-
-
+%post
+    mv /observatories.dat /home/root/pulsar/tempo2/observatory/observatories.dat
+    mv /obsys.dat /home/root/pulsar/tempo/obsys.dat
+    mv /psrchive.cfg /home/root/.psrchive.cfg
 
 
 
