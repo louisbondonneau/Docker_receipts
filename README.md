@@ -19,17 +19,29 @@ Build a container from nothing
 ### install Go and Singularity
 
 > apt-get update
+> 
 > apt-get install -y build-essential libssl-dev uuid-dev libgpgme11-dev squashfs-tools libseccomp-dev wget pkg-config git cryptsetup libglib2.0-dev
+> 
 > GO_VERSION=1.20.2 OS=linux ARCH=amd64
+> 
 > wget -O /tmp/go${GO_VERSION}.${OS}-${ARCH}.tar.gz https://dl.google.com/go/go${GO_VERSION}.${OS}-${ARCH}.tar.gz
+> 
 > tar -C /usr/local -xzf /tmp/go${GO_VERSION}.${OS}-${ARCH}.tar.gz
+> 
 > echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+> 
 > . ~/.bashrc
+> 
 > git clone --recurse-submodules https://github.com/sylabs/singularity.git singularity
+> 
 > cd singularity
+> 
 > ./mconfig
+> 
 > cd builddir
+> 
 > make
+> 
 > make install
 
 
