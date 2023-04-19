@@ -118,7 +118,7 @@ From: ubuntu:20.04
     make install
 
 %post
-    apt-get install -y x11-apps gedit
+    apt-get install -y x11-apps gedit gimp evince
     apt-get install -y ghostscript
 
 
