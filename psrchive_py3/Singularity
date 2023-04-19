@@ -14,6 +14,7 @@ From: ubuntu:20.04
     apt -y install build-essential wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev pgplot5 python3-pip csh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
     pip3 install numpy==1.21
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit pyfits
+    pip3 install psrqpy
     ln -s /usr/bin/python3.8 /usr/bin/python
 
     export HOME=/home/root
@@ -117,7 +118,7 @@ From: ubuntu:20.04
 
 
 %post
-    apt-get install -y x11-apps gedit
+    apt-get install -y x11-apps gedit gimp evince
     apt-get install -y ghostscript
     apt-get install -y libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
 
