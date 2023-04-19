@@ -18,8 +18,8 @@ From: ubuntu:20.04
     apt -y install python2.7 -y
     curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
     python2.7 get-pip.py
-    pip2 install numpy matplotlib astropy astroplan scipy tinydb lmfit
-    pip2 install pyfits
+    pip2 install numpy matplotlib astropy astroplan scipy tinydb lmfit --user
+    pip2 install pyfits --user
 
     ln -s /usr/bin/python2.7 /usr/bin/python
 
@@ -124,7 +124,7 @@ From: ubuntu:20.04
     make
 
     cd $PRESTO/python && \
-        pip2 install ./
+        pip2 install ./ --user
 
 
 %files
