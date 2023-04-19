@@ -64,3 +64,20 @@ Build a container from nothing
 > 
 > singularity build /cep/lofar/pulsar/Singularity/pschive_py3.sif Singularity
 
+
+TODO
+----
+
+test script using
+tempo1
+> by generating a polyco file
+tempo2
+> tempo2 -gr transform ....
+psrchive
+> python /cep/lofar/pulsar/NenPlot...
+psredit
+> psredit -c dm ....
+presto
+> python $PRESTO/tests/???.py
+dreamBeam
+> calibration of a NenuFAR archive
