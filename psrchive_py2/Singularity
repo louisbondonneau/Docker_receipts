@@ -163,25 +163,5 @@ From: ubuntu:20.04
     mv /config/clk_dir /home/root/pulsar/
     mv /config/plk_setup_fr606_embrace.dat /home/root/pulsar/
 
-# git clone https://bitbucket.org/psrsoft/tempo2.git
-# cd $PSRHOME/tempo2
-# ./bootstrap
-# ./configure --prefix=$PSRHOME
-# make && make install
-# make plugins && make plugins-install
-# export TEMPO2=/home/root/pulsar/tempo2/T2runtime
-
-
 # root@4d226bfa8032:~/pulsar# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$PSRHOME/tempo2/include
 # root@4d226bfa8032:~/pulsar# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$PSRHOME/include
-
-
-
-./bootstrap
-mkdir build && cd build
-./../configure
-make
-make install
-
-
-SIGPYPROC
