@@ -42,15 +42,15 @@ if [[ $- == *i* ]]; then
     # tar a directory with the date to save it
     function save() {
     TARDATE=`date +'D%Y%m%dT%H%M'`
-    DIRTOTAR=`echo ${@}`
-    TARNAME=`echo ${@} | cut -d '.' -f1`
+    DIRTOTAR=`echo "${@}"`
+    TARNAME=`echo "${@}" | cut -d '.' -f1`
     tar -czvf ./"$TARNAME"_"$TARDATE".tar "$DIRTOTAR"
     }
     
     # reducepdf
     function pdfreduction() {
-    OutputFile=`echo ${@} | cut -d '.' -f1`"_gs.pdf"
-    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -r400 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OutputFile ${@}
+    OutputFile=`echo "${@}" | cut -d '.' -f1`"_gs.pdf"
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -r400 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OutputFile "${@}"
     }
     
     # tempo2
