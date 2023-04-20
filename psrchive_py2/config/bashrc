@@ -1,5 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
+PS1='\[\033[01;31m\](Singularity)\[\033[00m\] \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 if [[ $- == *i* ]]; then
     # Code à exécuter si le shell est en mode interactif
     PS1='\[\033[01;31m\](Singularity)\[\033[00m\] \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
