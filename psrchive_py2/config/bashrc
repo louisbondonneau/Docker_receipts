@@ -40,21 +40,21 @@ if [[ $- == *i* ]]; then
     bind '"\e[B"':history-search-forward
 
     # tar a directory with the date to save it
-    # function save() {
-    # TARDATE=`date +'D%Y%m%dT%H%M'`
-    # DIRTOTAR=`echo "${@}"`
-    # TARNAME=`echo "${@}" | cut -d '.' -f1`
-    # tar -czvf ./"$TARNAME"_"$TARDATE".tar "$DIRTOTAR"
-    # }
-    # 
-    # # reducepdf
-    # function pdfreduction() {
-    # OutputFile=`echo "${@}" | cut -d '.' -f1`"_gs.pdf"
-    # gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -r400 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OutputFile "${@}"
-    # }
-    # 
-    # # tempo2
-    # function tempo2_plk() {
-    # tempo2 -clkdir /home/root/pulsar/clk_dir/ -gr plk -nspr 1 -nofit -nobs 30000 -f $1 -setup /home/root/pulsar/plk_setup_fr606_embrace.dat $2
-    # }
+    save() {
+        TARDATE=`date +'D%Y%m%dT%H%M'`
+        DIRTOTAR=`echo "${@}"`
+        TARNAME=`echo "${@}" | cut -d '.' -f1`
+        tar -czvf ./"$TARNAME"_"$TARDATE".tar "$DIRTOTAR"
+    }
+    
+    # reducepdf
+    pdfreduction() {
+        OutputFile=`echo "${@}" | cut -d '.' -f1`"_gs.pdf"
+        gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -r400 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OutputFile "${@}"
+    }
+    
+    # tempo2
+    tempo2_plk() {
+        tempo2 -clkdir /home/root/pulsar/clk_dir/ -gr plk -nspr 1 -nofit -nobs 30000 -f $1 -setup /home/root/pulsar/plk_setup_fr606_embrace.dat $2
+    }
 fi
