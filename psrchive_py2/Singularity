@@ -22,6 +22,7 @@ From: ubuntu:20.04
 
     mkdir -p $PSRHOME
     mv config/bashrc ~/.bashrc
+    . /home/root/.bashrc
 
     pip3 install numpy==1.21 --user
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit --user
