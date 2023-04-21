@@ -97,7 +97,7 @@ From: ubuntu:20.04
         make && \
         make install && \
         make plugins && \
-        make plugins-install
+        make plugins-install && \
         cp -r $HOME/pulsar/src/tempo2/T2runtime/* $TEMPO2/
 
 # #####  PSRCHIVE  #####
