@@ -86,7 +86,20 @@ From: ubuntu:20.04
     apt-get install -y python-tk
     apt-get install -y pkg-config
 
-#####  PSRCHIVE & TEMPO2  #####
+#####  TEMPO 2  #####
+%post
+    cd $PSRHOME && \
+        git clone https://bitbucket.org/psrsoft/tempo2.git
+
+    cd $PSRHOME/tempo2 && \
+        cp -r T2runtime $TEMPO2
+    ./configure --prefix=$PSRHOME
+    make
+    make install
+    make plugins
+    make plugins-install
+
+#####  PSRCHIVE  #####
 %post
     cd $PSRHOME && \
         git clone git://git.code.sf.net/p/psrchive/code psrchive
@@ -100,9 +113,6 @@ From: ubuntu:20.04
         ./packages/fftw.csh
     cd $PSRHOME/psrchive && \
         ./packages/cfitsio.csh && \
-        ./configure --prefix=$PSRHOME || true
-    cd $PSRHOME/psrchive && \
-        ./packages/tempo2.csh && \
         ./configure --prefix=$PSRHOME || true
     cd $PSRHOME/psrchive && \
         ./packages/psrcat.csh && \
@@ -126,7 +136,7 @@ From: ubuntu:20.04
     make install
 
 %post
-    apt-get install -y x11-apps gedit gimp evince nano
+    apt-get install -y x11-apps gedit gimp evince nano vim
     apt-get install -y ghostscript
 
 
@@ -157,6 +167,31 @@ From: ubuntu:20.04
     ./configure --prefix=$PSRHOME --enable-shared --with-x 
     make
     make install
+
+#####  NENUPY  #####
+%post
+    pip3 install nenupy
+    cd $PSRHOME/src
+    git clone https://github.com/telegraphic/PyGSM
+    cd PyGSM
+    wget -O gsm2016_components.h5 https://zenodo.org/record/3479985/files/gsm2016_components.h5?download=1
+    wget -O gsm_components.h5 https://zenodo.org/record/3479985/files/gsm_components.h5?download=1
+    python3 setup.py install
+
+#####  ANTPAT  #####
+%post
+    pip3 install python-casacore
+    cd $PSRHOME/src
+    git clone https://github.com/2baOrNot2ba/AntPat.git
+    cd $PSRHOME/src/AntPat/
+    python3 setup.py install
+
+#####  DREAMBEAM  #####
+%post
+    cd $PSRHOME/src
+    git clone https://github.com/2baOrNot2ba/dreamBeam.git
+    cd $PSRHOME/src/dreamBeam
+    python3 setup.py install
 
 #####  MV config files  #####
 %post

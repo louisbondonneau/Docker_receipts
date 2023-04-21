@@ -8,10 +8,10 @@ Depending on the installation singularity executable can be named "singularity" 
 
 Run a contaner
 --------------
-With psrchive and presto2.2 working under python2.7 + tempo2 + tempo1 + dspsr
+With psrchive, presto2.2 and dspsr bind under python2.7 + tempo2 + tempo1 + python3(nenupy + AntPat + dreamBeam + psrqpy)
 > singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py2.sif
 
-With psrchive and presto working under python3.8 + tempo2 + tempo1 + dspsr + nenupy + AntPat + dreamBeam + psrqpy
+With psrchive, presto4 and dspsr bind under python3.8 + tempo2 + tempo1 + nenupy + AntPat + dreamBeam + psrqpy
 > singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
 
 
@@ -78,7 +78,8 @@ tempo1
 > by generating a polyco file
 
 tempo2
-> tempo2 -gr transform ....
+> cd ~/pulsar/tempo2/example_data
+> tempo2 -gr plk -f example1.par example1.tim  -nofit
 
 psrchive
 > python /cep/lofar/pulsar/NenPlot...
