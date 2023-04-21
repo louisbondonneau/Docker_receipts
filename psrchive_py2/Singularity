@@ -92,8 +92,7 @@ From: ubuntu:20.04
         git clone https://bitbucket.org/psrsoft/tempo2.git
 
     cd $PSRHOME/tempo2 && \
-        . /home/root/.bashrc && \
-        cp -r T2runtime $TEMPO2
+        . /home/root/.bashrc
     ./configure --prefix=$PSRHOME
     make
     make install
