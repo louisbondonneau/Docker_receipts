@@ -87,12 +87,12 @@ From: ubuntu:20.04
 
 #####  TEMPO 2  #####
 %post
-    . /home/root/.bashrc
-    cd $HOME/pulsar/src && \
+    . /home/root/.bashrc && \
+        cd $HOME/pulsar/src && \
         git clone https://bitbucket.org/psrsoft/tempo2.git
 
-    cd $HOME/pulsar/src/tempo2 && \
-        . /home/root/.bashrc && \
+    . /home/root/.bashrc && \
+        cd $HOME/pulsar/src/tempo2 && \
         ./configure --prefix=$PSRHOME && \
         make && \
         make install && \
