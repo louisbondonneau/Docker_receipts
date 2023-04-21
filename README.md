@@ -64,10 +64,16 @@ Build a container from nothing
 > 
 > singularity build /cep/lofar/pulsar/Singularity/pschive_py3.sif Singularity
 
+
+### try an installation in the container
+
+> singularity run --writable-tmpfs
+
 known issues
 ------------
   1. relativ path to personnal home do not work ($HOME=/home/root)
   2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
+  3. psrcat do not work... 
 
 TODO
 ----
@@ -80,20 +86,24 @@ tempo1
 tempo2
 > cd ~/pulsar/tempo2/example_data
 > tempo2 -gr plk -f example1.par example1.tim  -nofit
+> psrchive_info  # Tempo2::Predictor support enabled
 
 psrchive
+> python -c 'import psrchive'
 > python /cep/lofar/pulsar/NenPlot...
 
 psredit
 > psredit -c dm ....
 
 presto
+> python -c 'import presto'
 > python $PRESTO/tests/???.py
 
 dreamBeam
 > calibration of a NenuFAR archive
 
 dspsr
+> python -c 'import dspsr'
 > by runnning it on a single-pulses file
 
 
