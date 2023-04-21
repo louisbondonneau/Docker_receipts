@@ -54,6 +54,7 @@ From: ubuntu:20.04
     export PSRCHIVE_CONFIG="$HOME"/.psrchive.cfg
     export PATH=${PATH}:"$PSRHOME"/bin:"$TEMPO2"/bin
     export PYTHONPATH="$PYTHONPATH":$PRESTO/lib/python
+    export PSRCAT_FILE=$PSRHOME/psrcat.db
 
 %post
     echo 'export HOME=/home/root' >> ~/.bashrc
@@ -88,6 +89,7 @@ From: ubuntu:20.04
 
 #####  TEMPO 2  #####
 %post
+    . /home/root/.bashrc
     cd $PSRHOME && \
         git clone https://bitbucket.org/psrsoft/tempo2.git
 
@@ -123,6 +125,13 @@ From: ubuntu:20.04
         make install
     echo '/home/root/pulsar/lib/python2.7/site-packages' > /home/root/.local/lib/python2.7/site-packages/mymodule.pth
 
+#####  PSRCAT DB UPDATE  #####
+%post
+    wget https://www.atnf.csiro.au/research/pulsar/psrcat/downloads/psrcat_pkg.tar.gz
+    tar -zxvf psrcat_pkg.tar.gz
+    mv psrcat_tar/psrcat.db $PSRCAT_FILE
+    rm psrcat_pkg.tar.gz
+    rm -r psrcat_tar
 
 #####  TEMPO 1  #####
 %post
