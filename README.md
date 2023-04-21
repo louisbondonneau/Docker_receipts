@@ -14,9 +14,9 @@ With psrchive and presto2.2 working under python2.7 + tempo2 + tempo1 + dspsr
 With psrchive and presto working under python3.8 + tempo2 + tempo1 + dspsr + nenupy + AntPat + dreamBeam + psrqpy
 > singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
 
+
 Build a container from nothing
 ------------------------------
-
 
 ### install Go and Singularity
 
@@ -64,6 +64,10 @@ Build a container from nothing
 > 
 > singularity build /cep/lofar/pulsar/Singularity/pschive_py3.sif Singularity
 
+known issues
+------------
+  1. relativ path to personnal home do not work ($HOME=/home/root)
+  2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
 
 TODO
 ----
