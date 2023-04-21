@@ -23,7 +23,7 @@ From: ubuntu:20.04
     export HOME=/home/root
     export PSRHOME=/home/root/pulsar
 
-    mkdir -p $PSRHOME
+    mkdir -p $PSRHOME/src
     
     mv config/bashrc ~/.bashrc
     . /home/root/.bashrc
