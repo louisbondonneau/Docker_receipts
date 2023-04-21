@@ -94,6 +94,7 @@ From: ubuntu:20.04
 
     . /home/root/.bashrc && \
         cd $HOME/pulsar/src/tempo2 && \
+        ./bootstrap && \
         ./configure --prefix=$PSRHOME && \
         make && \
         make install && \
