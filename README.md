@@ -78,6 +78,7 @@ known issues
 TODO
 ----
 ajouter:
+  PSRSALSA
 
 test script using
 tempo1

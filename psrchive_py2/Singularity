@@ -118,13 +118,9 @@ From: ubuntu:20.04
         ./configure --prefix=$PSRHOME || true
     cd $PSRHOME/psrchive && \
         ./packages/psrcat.csh && \
-        ./configure --prefix=$PSRHOME --enable-shared --with-x --with-psrcat=psrcat
-    cd $PSRHOME/psrchive && \
         ./configure --prefix=$PSRHOME --enable-shared --with-x --with-psrcat=psrcat && \
         make -j 6 && \
         make install
-    . /home/root/.bashrc && \
-        cd $PSRHOME/psrchive && \
         ./packages/psrcat.csh
     echo '/home/root/pulsar/lib/python2.7/site-packages' > /home/root/.local/lib/python2.7/site-packages/mymodule.pth
 
