@@ -21,7 +21,7 @@ From: ubuntu:20.04
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     apt update
-    apt -y install build-essential wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev pgplot5 python3-pip csh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
+    apt -y install build-essential tar wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev pgplot5 python3-pip csh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
     apt -y install python2-dev
 
 
@@ -116,12 +116,19 @@ From: ubuntu:20.04
     cd $PSRHOME/psrchive && \
         ./packages/cfitsio.csh && \
         ./configure --prefix=$PSRHOME || true
+    cd $PSRHOME/src && \
+        wget http://www.atnf.csiro.au/research/pulsar/psrcat/downloads/psrcat_pkg.tar.gz && \
+        tar --no-same-owner -xzvf psrcat_pkg.tar.gz && \
+        cd psrcat_tar && \
+        csh makeit && \
+        mkdir -p /home/root/pulsar/bin || true && \
+        mv psrcat /home/root/pulsar/bin && \
+        mkdir -p /home/root/pulsar/psrcat && \
+        mv psrcat.db /home/root/pulsar/psrcat
     cd $PSRHOME/psrchive && \
-        ./packages/psrcat.csh && \
         ./configure --prefix=$PSRHOME --enable-shared --with-x --with-psrcat=psrcat && \
         make -j 6 && \
         make install
-        ./packages/psrcat.csh
     echo '/home/root/pulsar/lib/python2.7/site-packages' > /home/root/.local/lib/python2.7/site-packages/mymodule.pth
 
 #####  TEMPO 1  #####
