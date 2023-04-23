@@ -8,10 +8,10 @@ Depending on the installation singularity executable can be named "singularity" 
 
 Run a contaner
 --------------
-With psrchive, presto2.2 and dspsr bind under python2.7 + tempo2 + tempo1 + python3(nenupy + AntPat + dreamBeam + psrqpy)
+With psrchive, presto2.2 and dspsr bind under python2.7 + tempo2 + tempo1 + psrsalsa + python3(nenupy + AntPat + dreamBeam + psrqpy)
 > singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py2.sif
 
-With psrchive, presto4 and dspsr bind under python3.8 + tempo2 + tempo1 + nenupy + AntPat + dreamBeam + psrqpy
+With psrchive, presto4 and dspsr bind under python3.8 + tempo2 + tempo1 + psrsalsa + nenupy + AntPat + dreamBeam + psrqpy
 > singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
 
 
@@ -73,7 +73,6 @@ known issues
 ------------
   1. relativ path to personnal home do not work ($HOME=/home/root)
   2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
-  3. psrcat do not work... 
 
 TODO
 ----
