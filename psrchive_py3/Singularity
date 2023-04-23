@@ -203,11 +203,14 @@ From: ubuntu:20.04
 %post
     . /home/root/.bashrc
     apt -y install libgsl-dev
+    gsl_version=`gsl-config --version`
+    gsl_version=`python -c "import numpy as np; print('%d0%d' % (np.floor($gsl_version), 10*($gsl_version % 1)))"`
     cd $PSRHOME
     git clone https://github.com/weltevrede/psrsalsa.git
     cd psrsalsa
-    # make
-    # make install
+    sed -i "s/GSLFLAGS *= *-DGSL_VERSION_NUMBER=.*/GSLFLAGS = -DGSL_VERSION_NUMBER=$gsl_version/" Makefile
+    make
+    make install
 
 #####  MV config files  #####
 %post
