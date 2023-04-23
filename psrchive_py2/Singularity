@@ -182,8 +182,8 @@ From: ubuntu:20.04
     cd $PSRHOME
     git clone https://github.com/weltevrede/psrsalsa.git
     cd psrsalsa
-    make
-    make install
+    # make
+    # make install
 
 #####  NENUPY  #####
 %post
