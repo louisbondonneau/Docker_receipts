@@ -199,6 +199,16 @@ From: ubuntu:20.04
     make
     make install
 
+##### PSRSALSA #####
+%post
+    . /home/root/.bashrc
+    apt -y install libgsl-dev
+    cd $PSRHOME
+    git clone https://github.com/weltevrede/psrsalsa.git
+    cd psrsalsa
+    make
+    make install
+
 #####  MV config files  #####
 %post
     mv /config/observatories.dat /home/root/pulsar/tempo2/observatory/observatories.dat

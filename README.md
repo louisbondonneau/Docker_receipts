@@ -108,3 +108,6 @@ dspsr
 > by runnning it on a single-pulses file
 
 
+apt -y install libgsl-dev
+git clone https://github.com/weltevrede/psrsalsa.git
+cd psrsalsa
