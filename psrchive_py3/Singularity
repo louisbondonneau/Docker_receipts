@@ -210,7 +210,7 @@ From: ubuntu:20.04
     cd psrsalsa
     sed -i "s/GSLFLAGS *= *-DGSL_VERSION_NUMBER=.*/GSLFLAGS = -DGSL_VERSION_NUMBER=$gsl_version/" Makefile
     make
-    make install
+    echo 'export PATH="$PATH":$PSRHOME/psrsalsa/bin' >> ~/.bashrc
 
 #####  MV config files  #####
 %post
