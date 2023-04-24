@@ -17,6 +17,7 @@ if [[ $- == *i* ]]; then
     alias ll='ls -alF'
     alias la='ls -A'
     alias l='ls -CF'
+    alias emacs='emacs -nw'
     
     
     # append to the history file, don't overwrite it
