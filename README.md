@@ -77,11 +77,10 @@ known issues
 TODO
 ----
 ajouter:
-  PSRSALSA
 
-test script using
+
 tempo1
-> by generating a polyco file
+> bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsar/ES03/ephem/B1919+21.par
 
 tempo2
 > cd ~/pulsar/tempo2/example_data
@@ -92,12 +91,18 @@ psrchive
 > python -c 'import psrchive'
 > python /cep/lofar/pulsar/NenPlot...
 
+psrcat
+> psrcat -E B1919+21
+
 psredit
 > psredit -c dm ....
 
 presto
 > python -c 'import presto'
-> python $PRESTO/tests/???.py
+> python /home/root/pulsar/presto/tests/test_presto_python.py
+
+psrsalsa
+> 
 
 dreamBeam
 > calibration of a NenuFAR archive
