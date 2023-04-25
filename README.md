@@ -77,7 +77,8 @@ known issues
 TODO
 ----
 ajouter:
-
+  cuda driver
+  jupyter
 
 tempo1
 > bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsar/ES03/ephem/B1919+21.par

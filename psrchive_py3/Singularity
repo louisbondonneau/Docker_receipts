@@ -14,10 +14,10 @@ From: ubuntu:20.04
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     apt update
-    apt -y install build-essential wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev pgplot5 python3-pip csh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
+    apt -y install build-essential wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev pgplot5 python3-pip csh tcsh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin nvidia-cuda-toolkit
     pip3 install numpy==1.21
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit pyfits
-    pip3 install psrqpy
+    pip3 install psrqpy jupyter
     ln -s /usr/bin/python3.8 /usr/bin/python
 
     export HOME=/home/root
@@ -49,7 +49,7 @@ From: ubuntu:20.04
     python2.7 get-pip.py
     pip2 install numpy --user
     pip2 install matplotlib astropy astroplan scipy tinydb lmfit --user
-    pip2 install pyfits --user
+    pip2 install pyfits jupyter --user
 
 %environment
     export HOME=/home/root
