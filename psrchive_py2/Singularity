@@ -81,14 +81,25 @@ From: ubuntu:20.04
     apt-get install -y python-tk
     apt-get install -y pkg-config
 
+##### SIGPROC #####
+%post
+    . /etc/bash.bashrc
+    cd $PSRHOME
+    git clone https://github.com/SixByNine/sigproc
+    cd sigproc
+    ./bootstrap
+    ./configure --prefix=$PSRHOME
+    make
+    make install
+
 #####  TEMPO 2  #####
 %post
     . /etc/bash.bashrc && \
-        cd $HOME/pulsar/src && \
+        cd $PSRHOME/src && \
         git clone https://bitbucket.org/psrsoft/tempo2.git
 
     . /etc/bash.bashrc && \
-        cd $HOME/pulsar/src/tempo2 && \
+        cd $PSRHOME/src/tempo2 && \
         ./bootstrap && \
         ./configure --prefix=$PSRHOME && \
         make && \
@@ -158,6 +169,17 @@ From: ubuntu:20.04
 #    cd $PRESTO/python && \
 #        pip2 install ./
 #
+###### SIGPROC #####
+#%post
+#    . /etc/bash.bashrc
+#    cd $PSRHOME
+#    git clone https://github.com/SixByNine/sigproc
+#    cd sigproc
+#    ./bootstrap
+#    ./configure --prefix=$PSRHOME
+#    make
+#    make install
+#
 ######  DSPSR  #####
 #%post
 #    . /etc/bash.bashrc
@@ -182,6 +204,7 @@ From: ubuntu:20.04
 #    sed -i "s/GSLFLAGS *= *-DGSL_VERSION_NUMBER=.*/GSLFLAGS = -DGSL_VERSION_NUMBER=$gsl_version/" Makefile
 #    make
 #    echo 'export PATH="$PATH":$PSRHOME/psrsalsa/bin' >> /etc/bash.bashrc
+#
 #
 ######  NENUPY  #####
 #%post
@@ -208,12 +231,12 @@ From: ubuntu:20.04
 #    cd $PSRHOME/src/dreamBeam
 #    python3 setup.py install
 #
-######  MV config files  #####
-#%post
-#    mv /config/observatories.dat /usr/local/pulsar/tempo2/observatory/observatories.dat
-#    mv /config/obsys.dat /usr/local/pulsar/tempo/obsys.dat
-#    mv /config/psrchive.cfg /usr/local/pulsar/.psrchive.cfg
-#    mv /config/clk_dir /usr/local/pulsar/
-#    mv /config/plk_setup_fr606_embrace.dat /usr/local/pulsar/
-#
+#####  MV config files  #####
+%post
+    mv /config/observatories.dat /usr/local/pulsar/tempo2/observatory/observatories.dat
+    mv /config/obsys.dat /usr/local/pulsar/tempo/obsys.dat
+    mv /config/psrchive.cfg /usr/local/pulsar/.psrchive.cfg
+    mv /config/clk_dir /usr/local/pulsar/
+    mv /config/plk_setup_fr606_embrace.dat /usr/local/pulsar/
+
 # mv: cannot move '/config/observatories.dat' to '/usr/local/pulsar/tempo2/observatory/observatories.dat': No such file or directory
