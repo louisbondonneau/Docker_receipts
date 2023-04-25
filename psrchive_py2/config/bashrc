@@ -62,6 +62,6 @@ tempo2_plk() {
     tempo2 -clkdir /usr/local/pulsar/clk_dir/ -gr plk -nspr 1 -nofit -nobs 30000 -f $1 -setup /usr/local/pulsar/plk_setup_fr606_embrace.dat $2
 }
 
-if [ -f ~/.bash_singular ]; then
-    . ~/.bash_singular
-fi
+# if [ -f ~/.bash_singular ]; then
+#     . ~/.bash_singular
+# fi
