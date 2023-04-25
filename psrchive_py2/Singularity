@@ -113,7 +113,6 @@ From: ubuntu:20.04
     # OPENMP_INCL= #-L/
     # OPENMP_LIB= #-L
     make
-    make install
 
 #####  TEMPO 2  #####
 %post
