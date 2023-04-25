@@ -34,7 +34,6 @@ From: ubuntu:20.04
     ln -s /usr/bin/python2.7 /usr/bin/python
 
 %environment
-    export HOME=/home/root
     export PSRHOME=/home/root/pulsar
     export PGPLOT_DIR=/usr/lib/pgplot5
     export PGPLOT_FONT="$PGPLOT_DIR"/grfont.dat
@@ -51,7 +50,6 @@ From: ubuntu:20.04
     export PSRCAT_FILE=$PSRHOME/psrcat.db
 
 %post
-    echo 'export HOME=/home/root' >> /etc/bash.bashrc
     echo 'export PSRHOME=/home/root/pulsar' >> /etc/bash.bashrc
     echo 'export PGPLOT_DIR=/usr/lib/pgplot5' >> /etc/bash.bashrc
     echo 'export PGPLOT_FONT="$PGPLOT_DIR"/grfont.dat' >> /etc/bash.bashrc
