@@ -108,8 +108,8 @@ From: ubuntu:20.04
     cd $PSRHOME
     git clone https://github.com/chowdhuryaditya/gptool.git
     cd gptool
-    sed -i "s#PGPLOT_INCL=.*#PGPLOT_INCL=-I$(PGPLOT_DIR)/include#" Makefile
-    sed -i "s#PGPLOT_LIB=.*#PGPLOT_LIB=-L$(PGPLOT_DIR)/lib#" Makefile
+    sed -i "s#PGPLOT_INCL=.*#PGPLOT_INCL=-I$(PGPLOT_DIR)/include#" makefile
+    sed -i "s#PGPLOT_LIB=.*#PGPLOT_LIB=-L$(PGPLOT_DIR)/lib#" makefile
     # OPENMP_INCL= #-L/
     # OPENMP_LIB= #-L
     make
