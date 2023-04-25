@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# executed by bash(1) for non-login shells.
 
 if [[ $- == *i* ]]; then
     # Code à exécuter si le shell est en mode interactif
