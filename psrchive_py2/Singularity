@@ -246,7 +246,7 @@ From: ubuntu:20.04
 #####  MV config files  #####
 %post
     mv /config/observatories.dat /usr/local/pulsar/tempo2/observatory/observatories.dat
-    # mv /config/obsys.dat /usr/local/pulsar/tempo/obsys.dat
+    mv /config/obsys.dat /usr/local/pulsar/tempo/obsys.dat
     mv /config/psrchive.cfg /usr/local/pulsar/.psrchive.cfg
     mv /config/clk_dir /usr/local/pulsar/
     mv /config/plk_setup_fr606_embrace.dat /usr/local/pulsar/
