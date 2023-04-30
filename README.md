@@ -73,6 +73,12 @@ known issues
 ------------
   1. psrsmooth do not exist!
   2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
+  3. python installation on your home or environment variables in your bashrc can affect the operation inside the container. To avoid this, add the following lines to the beginning of your ~/.bashrc ~/.bash_profile
+`# Check if we are inside a Singularity container
+if [ -n "$SINGULARITY_CONTAINER" ]; then
+    # If we are inside a Singularity container, exit the script here
+    return
+fi
 
 TODO
 ----
@@ -83,13 +89,13 @@ tempo1
 > bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsar/ES03/ephem/B1919+21.par
 
 tempo2
-> cd /usr/local/pulsar/tempo2/example_data
-> tempo2 -gr plk -f example1.par example1.tim  -nofit
-> psrchive_info  # Tempo2::Predictor support enabled
+`cd /usr/local/pulsar/tempo2/example_data
+tempo2 -gr plk -f example1.par example1.tim  -nofit
+psrchive_info  # Tempo2::Predictor support enabled
 
 psrchive
-> python -c 'import psrchive'
-> python /cep/lofar/pulsar/NenPlot...
+python -c 'import psrchive'
+python /cep/lofar/pulsar/NenPlot...
 
 psrcat
 > psrcat -E B1919+21
@@ -99,7 +105,7 @@ psredit
 
 presto
 > python -c 'import presto'
-> python /home/root/pulsar/presto/tests/test_presto_python.py
+> python /usr/local/pulsar/presto/tests/test_presto_python.py
 
 psrsalsa
 > 
