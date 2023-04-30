@@ -14,7 +14,7 @@ From: ubuntu:20.04
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     apt update
-    apt -y install build-essential wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev pgplot5 python3-pip csh tcsh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin nvidia-cuda-toolkit firefox
+    apt -y install build-essential wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev libgsl-dev pgplot5 python3-pip csh tcsh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin nvidia-cuda-toolkit firefox imagemagick
     pip3 install numpy==1.21
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit pyfits
     pip3 install psrqpy jupyter
@@ -203,7 +203,6 @@ From: ubuntu:20.04
 ##### PSRSALSA #####
 %post
     . /etc/bash.bashrc
-    apt -y install libgsl-dev
     gsl_version=`gsl-config --version`
     gsl_version=`python -c "import numpy as np; print('%d0%d' % (np.floor($gsl_version), 10*($gsl_version % 1)))"`
     cd $PSRHOME
@@ -211,7 +210,7 @@ From: ubuntu:20.04
     cd psrsalsa
     sed -i "s/GSLFLAGS *= *-DGSL_VERSION_NUMBER=.*/GSLFLAGS = -DGSL_VERSION_NUMBER=$gsl_version/" Makefile
     make
-    echo 'export PATH="$PATH":$PSRHOME/psrsalsa/bin' >> ~/.bashrc
+    echo 'export PATH="$PATH":$PSRHOME/psrsalsa/bin' >> /etc/bash.bashrc
 
 #####  NENUPY  #####
 %post

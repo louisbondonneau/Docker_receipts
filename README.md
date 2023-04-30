@@ -77,11 +77,7 @@ known issues
 TODO
 ----
 ajouter:
-  jupyter
   spyder
-  https://github.com/SixByNine/sigproc
-  https://github.com/ymaan4/RFIClean (need too change somthing in the  makefile)
-  https://github.com/chowdhuryaditya/gptool (need too change somthing in the  makefile)
 
 tempo1
 > bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsar/ES03/ephem/B1919+21.par
