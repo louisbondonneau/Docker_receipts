@@ -71,7 +71,7 @@ Build a container from nothing
 
 known issues
 ------------
-  1. relativ path to personnal home do not work ($HOME=/home/root)
+  1. psrsmooth do not exist!
   2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
 
 TODO
@@ -83,7 +83,7 @@ tempo1
 > bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsar/ES03/ephem/B1919+21.par
 
 tempo2
-> cd ~/pulsar/tempo2/example_data
+> cd /usr/local/pulsar/tempo2/example_data
 > tempo2 -gr plk -f example1.par example1.tim  -nofit
 > psrchive_info  # Tempo2::Predictor support enabled
 
