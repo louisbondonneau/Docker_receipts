@@ -78,7 +78,7 @@ known issues
 if [ -n "$SINGULARITY_CONTAINER" ]; then
     # If we are inside a Singularity container, exit the script here
     return
-fi
+fi`
 
 TODO
 ----
@@ -91,7 +91,7 @@ tempo1
 tempo2
 `cd /usr/local/pulsar/tempo2/example_data
 tempo2 -gr plk -f example1.par example1.tim  -nofit
-psrchive_info  # Tempo2::Predictor support enabled
+psrchive_info  # Tempo2::Predictor support enabled`
 
 psrchive
 python -c 'import psrchive'
