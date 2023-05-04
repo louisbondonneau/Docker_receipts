@@ -23,6 +23,8 @@ Run a contaner
 | pylib - AntPat     | OK (py3)       | OK (py3)       |
 | pylib - dreamBeam  | OK (py3)       | OK (py3)       |
 | pylib - psrqpy     | OK (py3)       | OK (py3)       |
+| pylib - clean.py   | OK (py2)       | NOK            |
+
 
 ### RUN pschive_py2 container
 ``` bash
@@ -80,7 +82,7 @@ cd Docker_receipts/psrchive_py3
 singularity build /cep/lofar/pulsar/Singularity/pschive_py3.sif Singularity
 ```
 
-### try an installation in the container
+### try a writable container
 
 > singularity run --writable-tmpfs
 

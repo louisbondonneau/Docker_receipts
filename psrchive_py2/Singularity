@@ -205,6 +205,15 @@ From: ubuntu:20.04
     make
     make install
 
+#####  COASTGUARD  #####
+%post
+    . /etc/bash.bashrc
+    cd /usr/local/pulsar/lib/python3.8/site-packages
+    git clone https://github.com/plazar/coast_guard.git
+    cp coast_guard/clean.py /usr/local/pulsar/bin/
+    echo 'export COASTGUARD_CFG=/usr/local/pulsar/lib/python3.8/site-packages/coast_guard/configurations' >> /etc/bash.bashrc
+
+
 ##### PSRSALSA #####
 %post
     . /etc/bash.bashrc
