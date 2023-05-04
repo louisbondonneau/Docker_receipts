@@ -11,7 +11,7 @@ if [[ $- == *i* ]]; then
     alias egrep='egrep --color=auto'
     
     # colored GCC warnings and errors
-    #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+    # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     
     # some more ls aliases
     alias ll='ls -alF'
@@ -60,6 +60,23 @@ pdfreduction() {
 # tempo2
 tempo2_plk() {
     tempo2 -clkdir /usr/local/pulsar/clk_dir/ -gr plk -nspr 1 -nofit -nobs 30000 -f $1 -setup /usr/local/pulsar/plk_setup_fr606_embrace.dat $2
+}
+
+clean_PSR_dm() {
+    PSR=`echo $1`
+    echo 'option for Nenuplot : '$2
+    a=0
+    nthread=10
+    liste=`ls /databf/nenufar-pulsar/DATA/$PSR/PSR/*.fits | cut -d '_' -f2 | sort | uniq`
+    curent_dir=`echo $PWD`
+    for i in $liste; do cd $curent_dir; mkdir $i; cd $i; ln -s /databf/nenufar-pulsar/DATA/$PSR/PSR/$PSR"_"$i*.fits ./; done
+    for i in $liste; do
+    let "a=$a + 1"; let "a=$a % $nthread"; if [ $a -eq $(($nthread - 1)) ]; then wait; fi
+    cd $curent_dir/$i
+    python /cep/lofar/pulsar/NenuPlot_v2.py -metadata_out -maskout -fit_DM $2 -noautorebin -arout *.fits > $i.log &
+    done
+    wait
+    cd $curent_dir
 }
 
 # if [ -f ~/.bash_singular ]; then

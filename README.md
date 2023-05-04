@@ -5,13 +5,28 @@ Singularity + Docker receipts can be found on github https://github.com/louisbon
 
 Depending on the installation singularity executable can be named "singularity" or "apptainer".
 
-
 Run a contaner
 --------------
-With psrchive, presto2.2 and dspsr bind under python2.7 + tempo2 + tempo1 + psrsalsa + python3(nenupy + AntPat + dreamBeam + psrqpy)
+
+| INSTALL            |   pschive_py2  |   pschive_py3  |
+| :----------------- |:---------------|:---------------|
+| psrchive           | OK (py2)       | OK (py3)       |
+| tempo2             | OK             | OK             |
+| tempo1             | OK             | OK             |
+| presto             | OK (v2.2 py2)  | OK (v4 py3)    |
+| psrsalsa           | OK             | OK             |
+| SIGPROC            | OK             | OK             |
+| RFICLEAN           | OK             | OK             |
+| GPTOOL             | OK             | OK             |
+| pylib - nenupy     | OK (py3)       | OK (py3)       |
+| pylib - AntPat     | OK (py3)       | OK (py3)       |
+| pylib - dreamBeam  | OK (py3)       | OK (py3)       |
+| pylib - psrqpy     | OK (py3)       | OK (py3)       |
+
+With psrchive, presto2.2 and dspsr bind under python2.7 + tempo2 + tempo1 + psrsalsa + SIGPROC + RFICLEAN + GPTOOL + python3(nenupy + AntPat + dreamBeam + psrqpy)
 > singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py2.sif
 
-With psrchive, presto4 and dspsr bind under python3.8 + tempo2 + tempo1 + psrsalsa + nenupy + AntPat + dreamBeam + psrqpy
+With psrchive, presto4 and dspsr bind under python3.8 + tempo2 + tempo1 + psrsalsa + SIGPROC + RFICLEAN + GPTOOL + nenupy + AntPat + dreamBeam + psrqpy
 > singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
 
 
