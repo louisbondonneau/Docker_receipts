@@ -14,6 +14,7 @@ Run a contaner
 | tempo2             | OK             | OK             |
 | tempo1             | OK             | OK             |
 | presto             | OK (v2.2 py2)  | OK (v4 py3)    |
+| dspsr              | OK (py2)       | OK (py3)       |
 | psrsalsa           | OK             | OK             |
 | SIGPROC            | OK             | OK             |
 | RFICLEAN           | OK             | OK             |
@@ -23,12 +24,15 @@ Run a contaner
 | pylib - dreamBeam  | OK (py3)       | OK (py3)       |
 | pylib - psrqpy     | OK (py3)       | OK (py3)       |
 
-With psrchive, presto2.2 and dspsr bind under python2.7 + tempo2 + tempo1 + psrsalsa + SIGPROC + RFICLEAN + GPTOOL + python3(nenupy + AntPat + dreamBeam + psrqpy)
-> singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py2.sif
+### RUN pschive_py2 container
+``` bash
+singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py2.sif
+```
 
-With psrchive, presto4 and dspsr bind under python3.8 + tempo2 + tempo1 + psrsalsa + SIGPROC + RFICLEAN + GPTOOL + nenupy + AntPat + dreamBeam + psrqpy
-> singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
-
+### RUN pschive_py3 container
+``` bash
+singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
+```
 
 Build a container from nothing
 ------------------------------
@@ -86,8 +90,13 @@ TODO
 ajouter:
   spyder
 
+CONTAINER TEST
+--------------
+
 tempo1
-> bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsar/ES03/ephem/B1919+21.par
+``` bash
+bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsar/ES03/ephem/B1919+21.par
+```
 
 tempo2
 ``` bash
@@ -103,7 +112,9 @@ python /cep/lofar/pulsar/NenPlot...
 ```
 
 psrcat
-> psrcat -E B1919+21
+``` bash
+psrcat -E B1919+21
+```
 
 psredit
 > psredit -c dm ....
