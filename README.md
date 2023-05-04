@@ -34,6 +34,19 @@ singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -
 singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
 ```
 
+known issues
+------------
+  1. psrsmooth do not exist!
+  2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
+  3. python installation on your home or environment variables in your bashrc can affect the operation inside the container. To avoid this, add the following lines to the beginning of your ~/.bashrc ~/.bash_profile
+``` bash
+# Check if we are inside a Singularity container
+if [ -n "$SINGULARITY_CONTAINER" ]; then
+    # If we are inside a Singularity container, exit the script here
+    return
+fi
+```
+
 Build a container from nothing
 ------------------------------
 
@@ -72,18 +85,6 @@ singularity build /cep/lofar/pulsar/Singularity/pschive_py3.sif Singularity
 
 > singularity run --writable-tmpfs
 
-known issues
-------------
-  1. psrsmooth do not exist!
-  2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
-  3. python installation on your home or environment variables in your bashrc can affect the operation inside the container. To avoid this, add the following lines to the beginning of your ~/.bashrc ~/.bash_profile
-``` bash
-# Check if we are inside a Singularity container
-if [ -n "$SINGULARITY_CONTAINER" ]; then
-    # If we are inside a Singularity container, exit the script here
-    return
-fi
-```
 
 TODO
 ----
