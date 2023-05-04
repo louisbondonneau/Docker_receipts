@@ -36,9 +36,8 @@ singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -
 
 known issues
 ------------
-  1. psrsmooth do not exist!
-  2. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
-  3. python installation on your home or environment variables in your bashrc can affect the operation inside the container. To avoid this, add the following lines to the beginning of your ~/.bashrc ~/.bash_profile
+  1. psrdata, hdf5... and other things in Vlad installed used by LOFAR are not installed at this time
+  2. python installation on your home or environment variables in your bashrc can affect the operation inside the container. To avoid this, add the following lines to the beginning of your ~/.bashrc ~/.bash_profile
 ``` bash
 # Check if we are inside a Singularity container
 if [ -n "$SINGULARITY_CONTAINER" ]; then
