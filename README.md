@@ -24,6 +24,7 @@ Run a contaner
 | pylib - dreamBeam  | OK (py3)       | OK (py3)       |
 | pylib - psrqpy     | OK (py3)       | OK (py3)       |
 | pylib - clean.py   | OK (py2)       | NOK            |
+| pylib - pyqt5      | OK (py3)       | OK (py3)       |
 
 
 ### RUN pschive_py2 container
@@ -103,7 +104,7 @@ bash /cep/lofar/pulsar/ephem_scripts/par_conv_to_tempo1.sh /databf/nenufar-pulsa
 tempo2
 ``` bash
 cd /usr/local/pulsar/tempo2/example_data
-tempo2 -gr plk -f example1.par example1.tim  -nofit
+tempo2 -f example1.par example1.tim  -nofit
 psrchive_info  # Tempo2::Predictor support enabled~
 ```
 
