@@ -14,6 +14,9 @@ From: ubuntu:20.04
     export PSRHOME=/usr/local/pulsar
     mkdir -p $PSRHOME/src
     cat config/bashrc >  /etc/bash.bashrc
+
+    
+    apt -y install python3-pyqt5
     
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -23,12 +26,11 @@ From: ubuntu:20.04
     apt -y install python2-dev
     pip3 install numpy==1.21
 
-    apt update && apt upgrade
-    apt -y install qt5-qmake
-    pip3 install --upgrade pip
-    pip3 install sip
-    apt -y install python3-pyqt5
-    pip3 install PyQtWebEngine
+    # apt update && apt upgrade
+    # apt -y install qt5-qmake
+    # pip3 install --upgrade pip
+    # pip3 install sip
+    # pip3 install PyQtWebEngine
 
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit
     pip3 install pyfits
