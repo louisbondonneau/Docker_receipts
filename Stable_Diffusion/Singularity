@@ -9,7 +9,7 @@ From: ubuntu:22.04
         python3-pip \
         python3-virtualenv
 
-    apt update && apt install midori
+    apt update && apt upgrade && apt install midori
     apt -y install firefox imagemagick
     apt-get install -y x11-apps gedit gimp evince nano
     apt-get install -y ghostscript
