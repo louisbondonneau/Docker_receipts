@@ -15,7 +15,7 @@ From: ubuntu:20.04
     mkdir -p $PSRHOME/src
     cat config/bashrc >  /etc/bash.bashrc
 
-    
+    apt update && apt upgrade
     apt -y install python3-pyqt5
     
     TZ=Europe/Paris
