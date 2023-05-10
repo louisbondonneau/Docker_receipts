@@ -1,0 +1,36 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%post
+    apt-get update && apt-get install -y \
+        wget \
+        git \
+        python3 \
+        python3-pip \
+        python3-virtualenv
+
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+    mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda-repo-ubuntu2204-12-1-local_12.1.0-530.30.02-1_amd64.deb
+    dpkg -i cuda-repo-ubuntu2204-12-1-local_12.1.0-530.30.02-1_amd64.deb
+    cp /var/cuda-repo-ubuntu2204-12-1-local/cuda-*-keyring.gpg /usr/share/keyrings/
+    apt-get update
+    apt-get -y install cuda
+
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    chmod +x Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /usr/local/miniconda
+
+    . /usr/local/miniconda/etc/profile.d/conda.sh
+    conda create --name sdwebui python=3.10.6 -y
+    conda activate sdwebui
+
+    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+    wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
+    mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion/
+
+# %runscript
+#     . /usr/local/miniconda/etc/profile.d/conda.sh
+#     conda activate sdwebui
+#     cd /stable-diffusion-webui
+#     python3 webui.py
