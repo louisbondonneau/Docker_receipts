@@ -25,12 +25,15 @@ From: ubuntu:22.04
     conda create --name sdwebui python=3.10.6 -y
     conda activate sdwebui
 
+    cd /usr/local
     git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
     wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
     mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion/
 
+    pip3 install fastapi
+
 # %runscript
 #     . /usr/local/miniconda/etc/profile.d/conda.sh
 #     conda activate sdwebui
-#     cd /stable-diffusion-webui
+#     cd /usr/local/stable-diffusion-webui
 #     python3 webui.py
