@@ -47,8 +47,8 @@ From: ubuntu:22.04
     pip3 install packaging
 
 %post
-    pip3 install nvidia-cublas-cu11==11.10.3.66
-    
+    pip3 install nvidia-cublas-cu11==11.10.3.66 nvidia-cudnn-cu11==8.5.0.96 nvidia-cufft-cu11==10.9.0.58
+
 %post
     pip3 install torch
 
