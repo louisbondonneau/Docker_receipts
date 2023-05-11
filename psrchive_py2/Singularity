@@ -16,7 +16,7 @@ From: ubuntu:20.04
     cat config/bashrc >  /etc/bash.bashrc
 
     apt update && apt upgrade
-    apt -y install python3-pyqt5
+    apt -y install python3-pyqt5 python3-pyqt5.qtwebengine/focal
     
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -25,8 +25,6 @@ From: ubuntu:20.04
     apt -y install bc
     apt -y install python2-dev
     pip3 install numpy==1.21
-    
-    pip3 install PyQtWebEngine
 
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit
     pip3 install pyfits
