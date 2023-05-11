@@ -41,13 +41,12 @@ From: ubuntu:22.04
 %post
 
     cd /usr/local
-    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
-    wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
-    mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion
+    bash <(wget -qO- https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh)
 
-    cd stable-diffusion-webui
-    bash webui.sh -f
+    # cd /usr/local
+    # wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
+    # mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion
 
 
 # %runscript
