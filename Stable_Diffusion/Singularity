@@ -33,7 +33,8 @@ From: ubuntu:22.04
     mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion/
 
     pip3 install fastapi
-    pip3 install packaging torch
+    pip3 install packaging
+    # pip3 install torch
 
 # %runscript
 #     . /usr/local/miniconda/etc/profile.d/conda.sh
