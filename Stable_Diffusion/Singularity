@@ -45,6 +45,11 @@ From: ubuntu:22.04
 %post
     pip3 install fastapi
     pip3 install packaging
+
+%post
+    pip3 install nvidia-cublas-cu11==11.10.3.66
+    
+%post
     pip3 install torch
 
 # %runscript
