@@ -19,6 +19,8 @@ From: ubuntu:22.04
     apt-get install -y x11-apps gedit gimp evince nano
     apt-get install -y ghostscript
 
+
+%post
     apt-get -y purge nvidia-*
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
     dpkg -i cuda-keyring_1.0-1_all.deb
@@ -26,22 +28,24 @@ From: ubuntu:22.04
     apt-get -y install cuda
     apt-get -y install pciutils
 
-#     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-#     chmod +x Miniconda3-latest-Linux-x86_64.sh
-#     bash Miniconda3-latest-Linux-x86_64.sh -b -p /usr/local/miniconda
-# 
-#     . /usr/local/miniconda/etc/profile.d/conda.sh
-#     conda create --name sdwebui python=3.10.6 -y
-#     conda activate sdwebui
-# 
-#     cd /usr/local
-#     git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
-#     wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
-#     mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion/
-# 
-#     pip3 install fastapi
-#     pip3 install packaging
-#     # pip3 install torch
+%post
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    chmod +x Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /usr/local/miniconda
+
+    . /usr/local/miniconda/etc/profile.d/conda.sh
+    conda create --name sdwebui python=3.10.6 -y
+    conda activate sdwebui
+
+    cd /usr/local
+    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+    wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
+    mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion/
+
+%post
+    pip3 install fastapi
+    pip3 install packaging
+    pip3 install torch
 
 # %runscript
 #     . /usr/local/miniconda/etc/profile.d/conda.sh
