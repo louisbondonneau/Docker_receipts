@@ -43,6 +43,7 @@ From: ubuntu:22.04
     mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion/
 
 %post
+    pip3 install numpy
     pip3 install fastapi
     pip3 install packaging
 
@@ -50,7 +51,7 @@ From: ubuntu:22.04
     pip3 install nvidia-cublas-cu11==11.10.3.66 nvidia-cudnn-cu11==8.5.0.96 nvidia-cufft-cu11==10.9.0.58
 
 %post
-    pip3 install torch
+    pip3 install torch --cache-dir /data/lbondonneau/tmp
 
 # %runscript
 #     . /usr/local/miniconda/etc/profile.d/conda.sh
