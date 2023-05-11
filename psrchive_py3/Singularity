@@ -13,12 +13,11 @@ From: ubuntu:20.04
 %post
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-    apt update
+    apt update && apt upgrade
+    apt -y install python3-pyqt5 python3-pyqt5.qtwebengine
     apt -y install build-essential manpages-dev htop wget rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev libgsl-dev pgplot5 python3-pip csh tcsh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin nvidia-cuda-toolkit firefox imagemagick
     apt -y install bc
 
-    apt update && apt upgrade
-    apt -y install python3-pyqt5 python3-pyqt5.qtwebengine
 
     pip3 install numpy==1.21
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit pyfits
