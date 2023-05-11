@@ -12,8 +12,8 @@ From: ubuntu:22.04
         python3-virtualenv
 
     # apt update && apt upgrade && apt install midori
-    apt install -y snap
-    snap install midori
+    # apt install -y snap
+    # snap install midori
 
     apt -y install firefox imagemagick
     apt-get install -y x11-apps gedit gimp evince nano
