@@ -39,9 +39,7 @@ From: ubuntu:22.04
     pip3 install torch --cache-dir /data/lbondonneau/tmp
 
 %post
-
     cd /usr/local
-
     bash <(wget -qO- https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh)
 
     # cd /usr/local
