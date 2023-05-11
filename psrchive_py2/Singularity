@@ -16,7 +16,7 @@ From: ubuntu:20.04
     cat config/bashrc >  /etc/bash.bashrc
 
     apt update && apt upgrade
-    apt -y install python3-pyqt5 python3-pyqt5.qtwebengine/focal
+    apt -y install python3-pyqt5 python3-pyqt5.qtwebengine
     
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
