@@ -40,7 +40,10 @@ From: ubuntu:22.04
 
 %post
     cd /usr/local
-    bash <(wget -qO- https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh)
+    # bash <(wget -qO- https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh)
+    wget -qO /tmp/webui.sh https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh
+    chmod +x /tmp/webui.sh
+    /tmp/webui.sh
 
     # cd /usr/local
     # wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
