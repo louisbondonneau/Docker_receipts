@@ -29,12 +29,12 @@ Run a contaner
 
 ### RUN pschive_py2 container
 ``` bash
-singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py2.sif
+singularity run -B /databf:/databf -B /data:/data -B /cep:/cep /cep/lofar/pulsar/Singularity/pschive_py2.sif
 ```
 
 ### RUN pschive_py3 container
 ``` bash
-singularity run -B $HOME:$HOME  -B /databf:/databf -B /data:/data -B /cep:/cep -B ~/.Xauthority:/home/root/.Xauthority /cep/lofar/pulsar/Singularity/pschive_py3.sif
+singularity run -B /databf:/databf -B /data:/data -B /cep:/cep /cep/lofar/pulsar/Singularity/pschive_py3.sif
 ```
 
 known issues
@@ -160,4 +160,4 @@ dreamBeam
 
 dspsr
 > python -c 'import dspsr'
-> by runnning it on a single-pulses file
+> dspsr -A -L 10 -E /databf/nenufar-pulsar/ES03/ephem/B2217+47.par -b 512 -O B2217+47_D20220304T1154_59642_002110_0057_BEAM0_dspsr /databf/nenufar-pulsar/DATA/B2217+47/RAW/B2217+47_D20220304T1154_59642_002110_0057_BEAM0.0000.raw
