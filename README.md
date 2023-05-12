@@ -87,6 +87,30 @@ singularity build /cep/lofar/pulsar/Singularity/pschive_py3.sif Singularity
 
 > singularity run --writable-tmpfs
 
+### try without any interference of your personal environment
+
+> singularity run --cleanenv
+
+### use CUDA
+
+on nancep5 there is a TESLA T4 that you can use with dspsr for example
+> singularity run --nv ***
+``` bash
+> nvidia-smi
+Fri May 12 12:20:25 2023
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 525.105.17   Driver Version: 525.105.17   CUDA Version: 12.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla T4            On   | 00000000:3B:00.0 Off |                    0 |
+| N/A   36C    P8     9W /  70W |      4MiB / 15360MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+``` 
+
 
 TODO
 ----
