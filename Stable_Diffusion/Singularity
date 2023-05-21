@@ -37,6 +37,7 @@ From: ubuntu:22.04
 
 %post
     pip3 install torch --cache-dir /data/lbondonneau/tmp
+    pip3 install torchvision --cache-dir /data/lbondonneau/tmp
 
 %post
     cd /usr/local
