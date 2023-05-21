@@ -45,13 +45,12 @@ From: ubuntu:22.04
     # bash <(wget -qO- https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh)
     wget -qO /tmp/webui.sh https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh
     chmod +x /tmp/webui.sh
-    # sed -i 's|exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@"|echo '\''exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@"'\''|g' /tmp/webui.sh
-    # sed -i 's|exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"|echo '\''exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"'\''|g' /tmp/webui.sh
-    sed -i "s|webui.api_only()|print('Would execute: webui.api_only()')|g" launch.py
-    sed -i "s|webui.webui()|print('Would execute: webui.webui()')|g" launch.py
-
+    sed -i 's|exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@"|echo '\''exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@"'\''|g' /tmp/webui.sh
+    sed -i 's|exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"|echo '\''exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"'\''|g' /tmp/webui.sh
     /tmp/webui.sh -f
-
+    sed -i "s|webui.api_only()|print('Would execute: webui.api_only()')|g" /usr/local/stable-diffusion-webui/launch.py
+    sed -i "s|webui.webui()|print('Would execute: webui.webui()')|g" /usr/local/stable-diffusion-webui/launch.py
+    exec python3 launch.py
     # cd /usr/local
     # wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
     # mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion
