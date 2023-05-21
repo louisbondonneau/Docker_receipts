@@ -18,6 +18,9 @@ From: ubuntu:22.04
     apt -y install imagemagick
     apt-get install -y x11-apps gedit gimp evince nano
     apt-get install -y ghostscript
+    
+    TZ=Europe/Paris
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     apt update && apt -y install falkon
     apt -y install snap
     snap install firefox
