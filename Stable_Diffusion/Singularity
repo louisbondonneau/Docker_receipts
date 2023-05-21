@@ -26,7 +26,7 @@ From: ubuntu:22.04
     dpkg -i cuda-keyring_1.0-1_all.deb
     apt-get update
     apt-get -y install cuda
-    apt-get -y install pciutils
+    apt-get -y install pciutils mesa-utils
         
     pip3 install numpy
     pip3 install fastapi
@@ -43,6 +43,8 @@ From: ubuntu:22.04
     # bash <(wget -qO- https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh)
     wget -qO /tmp/webui.sh https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh
     chmod +x /tmp/webui.sh
+    sed -i 's|exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@"|echo '\''exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@"'\''|g' /tmp/webui.sh
+    sed -i 's|exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"|echo '\''exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"'\''|g' /tmp/webui.sh
     /tmp/webui.sh -f
 
     # cd /usr/local
