@@ -50,6 +50,7 @@ From: ubuntu:22.04
     /tmp/webui.sh -f
     sed -i "s|webui.api_only()|print('Would execute: webui.api_only()')|g" /usr/local/stable-diffusion-webui/launch.py
     sed -i "s|webui.webui()|print('Would execute: webui.webui()')|g" /usr/local/stable-diffusion-webui/launch.py
+    cd /usr/local/stable-diffusion-webui
     exec python3 launch.py
     # cd /usr/local
     # wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
