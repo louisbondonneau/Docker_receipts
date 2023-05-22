@@ -46,6 +46,9 @@ From: ubuntu:22.04
     pip3 install torch --cache-dir /data/lbondonneau/tmp
     pip3 install urllib3 pillow charset-normalizer certifi requests --cache-dir /data/lbondonneau/tmp
     pip3 install torchvision --cache-dir /data/lbondonneau/tmp
+    # pip3 install tk
+    apt install python3-tk
+
 
 %post
     cd /usr/local
