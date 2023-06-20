@@ -79,6 +79,36 @@ clean_PSR_dm() {
     cd $curent_dir
 }
 
+export CHECKOUT_LISTE="psrchive
+dspsr
+tempo
+presto
+psrsalsa
+sigproc
+RFIClean"
+
+checkout() {
+    original_dir=$(pwd) # Sauvegarde le dossier actuel
+    for dir in $CHECKOUT_LISTE
+    do
+        if [ -d "$PSRHOME/$dir" ]; then
+            cd "$PSRHOME/$dir" || continue
+            if [ -d ".git" ]; then
+                echo "Dossier: $PSRHOME/$dir"
+                echo "Checkout: $(git rev-parse HEAD)"
+                echo "-------------------"
+            else
+                echo "$PSRHOME/$dir n'est pas un dépôt Git."
+                echo "-------------------"
+            fi
+            cd "$original_dir" || return
+        else
+            echo "$PSRHOME/$dir n'est pas un dossier valide."
+            echo "-------------------"
+        fi
+    done
+}
+
 # if [ -f ~/.bash_singular ]; then
 #     . ~/.bash_singular
 # fi
