@@ -79,17 +79,17 @@ clean_PSR_dm() {
     cd $curent_dir
 }
 
-
-checkout() {
-    original_dir=$(pwd) # Sauvegarde le dossier actuel
-    liste_git="psrchive
+export CHECKOUT_LISTE="psrchive
 dspsr
 tempo
 presto
 psrsalsa
 sigproc
 RFIClean"
-    for dir in $liste_git
+
+checkout() {
+    original_dir=$(pwd) # Sauvegarde le dossier actuel
+    for dir in $CHECKOUT_LISTE
     do
         if [ -d "$PSRHOME/$dir" ]; then
             cd "$PSRHOME/$dir" || continue
