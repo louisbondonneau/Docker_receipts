@@ -13,6 +13,7 @@ From: ubuntu:20.04
     config/psrchive.cfg
     config/clk_dir
     config/plk_setup_fr606_embrace.dat
+    config/get_casacore_data.sh
 
 #####  python3  #####
 %post
@@ -247,6 +248,10 @@ From: ubuntu:20.04
     wget -O gsm2016_components.h5 https://zenodo.org/record/3479985/files/gsm2016_components.h5?download=1
     wget -O gsm_components.h5 https://zenodo.org/record/3479985/files/gsm_components.h5?download=1
     python3 setup.py install
+    
+#####  CASACORE_DATA #####
+%post
+    bash /config/get_casacore_data.sh
 
 #####  ANTPAT  #####
 %post
