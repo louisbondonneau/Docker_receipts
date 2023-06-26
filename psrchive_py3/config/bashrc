@@ -94,8 +94,9 @@ checkout() {
         if [ -d "$PSRHOME/$dir" ]; then
             cd "$PSRHOME/$dir" || continue
             if [ -d ".git" ]; then
-                echo "Dossier: $PSRHOME/$dir"
+                echo "Directory: $PSRHOME/$dir"
                 echo "Checkout: $(git rev-parse HEAD)"
+                echo "DateTime: $(git show -s --format=%ci HEAD)"
                 echo "-------------------"
             else
                 echo "$PSRHOME/$dir n'est pas un dépôt Git."
