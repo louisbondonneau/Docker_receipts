@@ -42,6 +42,10 @@ From: ubuntu:20.04
     pip2 install pyfits jupyter
     pip2 install jupyter
     ln -s /usr/bin/python2.7 /usr/bin/python
+    apt -y install libbz2-dev
+    pip2 install fitsio
+    
+
 
 #####  GPU TOOLS + DRIVER  #####
 %post
