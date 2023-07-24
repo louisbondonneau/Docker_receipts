@@ -63,9 +63,14 @@ From: ubuntu:22.04
     cd /usr/local/stable-diffusion-webui
     exec python3 launch.py
 
+
 %post
     cd /usr/local/stable-diffusion-webui/models/Stable-diffusion
     wget https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors
+    wget https://huggingface.co/andite/anything-v4.0/resolve/main/anything-v4.0-pruned.safetensors
+    wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt
+    wget https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.safetensors
+
     # cd /usr/local
     # wget https://huggingface.co/andite/anything-v4.0/blob/main/anything-v4.5-pruned.ckpt -P your-model-path
     # mv your-model-path/anything-v4.5-pruned.ckpt stable-diffusion-webui/models/Stable-diffusion
@@ -79,3 +84,5 @@ From: ubuntu:22.04
 # 
 # cd /usr/local/stable-diffusion-webui/models/Stable-diffusion
 # wget https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors
+
+

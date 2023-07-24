@@ -85,26 +85,33 @@ tempo
 presto
 psrsalsa
 sigproc
+/usr/local/pulsar/lib/python2.7/site-packages/coast_guard
 RFIClean"
 
 checkout() {
     original_dir=$(pwd) # Sauvegarde le dossier actuel
     for dir in $CHECKOUT_LISTE
     do
-        if [ -d "$PSRHOME/$dir" ]; then
-            cd "$PSRHOME/$dir" || continue
+        if [ "${dir:0:1}" = "/" ]; then
+            full_path="$dir"
+        else
+            full_path="$PSRHOME/$dir"
+        fi
+        
+        if [ -d "$full_path" ]; then
+            cd "$full_path" || continue
             if [ -d ".git" ]; then
-                echo "Directory: $PSRHOME/$dir"
+                echo "Directory: $full_path"
                 echo "Checkout: $(git rev-parse HEAD)"
                 echo "DateTime: $(git show -s --format=%ci HEAD)"
                 echo "-------------------"
             else
-                echo "$PSRHOME/$dir n'est pas un dépôt Git."
+                echo "$full_path n'est pas un dépôt Git."
                 echo "-------------------"
             fi
             cd "$original_dir" || return
         else
-            echo "$PSRHOME/$dir n'est pas un dossier valide."
+            echo "$full_path n'est pas un dossier valide."
             echo "-------------------"
         fi
     done
