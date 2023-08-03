@@ -17,6 +17,7 @@ From: ubuntu:20.04
 
 #####  python3  #####
 %post
+    export DEBIAN_FRONTEND=noninteractive
     TZ=Europe/Paris
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     apt update && apt -y upgrade
@@ -25,10 +26,10 @@ From: ubuntu:20.04
     apt -y install build-essential manpages-dev htop wget tmux rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev libgsl-dev pgplot5 python3-pip csh tcsh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin nvidia-cuda-toolkit firefox imagemagick gnuplot
     apt -y install bc
 
-
     pip3 install numpy==1.21
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit
-    pip3 install psrqpy jupyter astroquery
+    pip3 install psrqpy astroquery
+    pip3 install jupyter || true
 
     ln -s /usr/bin/python3.8 /usr/bin/python
 
