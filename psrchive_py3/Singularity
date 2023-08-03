@@ -29,6 +29,8 @@ From: ubuntu:20.04
     pip3 install numpy==1.21
     pip3 install matplotlib astropy astroplan scipy tinydb lmfit
     pip3 install psrqpy astroquery
+    
+    pip3 install ipywidgets==8.0.6
     pip3 install widgetsnbextension --upgrade
     pip3 install jupyter
 
