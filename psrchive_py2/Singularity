@@ -39,8 +39,8 @@ From: ubuntu:20.04
     python2.7 get-pip.py
     pip2 install numpy
     pip2 install matplotlib astropy astroplan scipy tinydb lmfit
-    pip2 install pyfits jupyter
-    pip2 install jupyter
+    pip2 install pyfits
+    # pip2 install jupyter  # ERROR: Could not find a version that satisfies the requirement comm>=0.1.3
     ln -s /usr/bin/python2.7 /usr/bin/python
     apt -y install libbz2-dev
     pip2 install fitsio
