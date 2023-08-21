@@ -51,7 +51,7 @@ From: ubuntu:20.04
     apt-get update
     apt-get install -y python-tk
     apt-get install -y pkg-config
-    # apt-get install -y texlive-latex-base
+    apt-get install -y texlive-latex-base
     apt-get install -y texlive-extra-utils
 
 #####  GPU TOOLS + DRIVER  #####
