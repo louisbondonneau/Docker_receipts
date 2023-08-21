@@ -42,10 +42,6 @@ if [[ $- == *i* ]]; then
 
 fi
 
-xpdf() {
-    evince "$@"
-}
-
 # tar a directory with the date to save it
 save() {
     TARDATE=`date +'D%Y%m%dT%H%M'`
