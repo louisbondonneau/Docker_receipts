@@ -51,7 +51,7 @@ From: ubuntu:20.04
     apt-get update
     apt-get install -y python-tk
     apt-get install -y pkg-config
-    apt-get install -y texlive-latex-base
+    # apt-get install -y texlive-latex-base
     apt-get install -y texlive-extra-utils
 
 #####  GPU TOOLS + DRIVER  #####
@@ -227,7 +227,7 @@ From: ubuntu:20.04
     git checkout master
     git checkout $GIT_DSPSR_TAG
     ./bootstrap
-    echo  'apsr asp bcpm bpsr cpsr cpsr2 gmrt lbadr lbadr64 mark4 mark5 maxim mwa pdev pmdaq puma2 sigproc psrfits caspsr dummy fits spda1k spigot guppi' > $PSRHOME/dspsr/backends.list
+    echo  'apsr asp bcpm bpsr cpsr cpsr2 gmrt lbadr lbadr64 mark4 mark5 maxim mwa pdev pmdaq puma2 sigproc psrfits caspsr dummy fits spda1k spigot guppi lump' > $PSRHOME/dspsr/backends.list
     ./configure --prefix=$PSRHOME --enable-shared --with-x 
     make
     make install

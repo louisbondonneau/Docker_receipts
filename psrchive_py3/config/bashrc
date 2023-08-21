@@ -42,6 +42,9 @@ if [[ $- == *i* ]]; then
 
 fi
 
+xpdf() {
+    evince "$@"
+}
 
 # tar a directory with the date to save it
 save() {
