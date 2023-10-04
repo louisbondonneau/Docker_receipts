@@ -648,7 +648,7 @@ def folding_thread(src, file, mail, title, stopTime, parset_path='/home/lbondonn
     print(os.path.basename(parset_path) + '  ' + datetime.utcnow().isoformat() + ' :' + 'FOLD')
     file = waiting_for_file(file, stopTime, mail, parset_path)
     commande = ['python', '/cep/lofar/pulsar/NenuPlot_v2.py', '-fit_DM', '-defaraday', '-uploadpdf', '-initmetadata', '-nopdf', '-png',
-                '-b', '4', '-ta', '2', '-mailtitle', title, '-mail','[' + mail[0]]
+                '-b', '4', '-ta', '2', '-mailtitle', title, '-mail', '[' + mail[0]]
     # commande = ['python', '/cep/lofar/pulsar/NenuPlot_DIR/NenuPlot_v4/NenuPlot.py',
     #             '-u', '/home/lbondonneau/data/TMP/', '-fit_DM', '-fit_RM', '-defaraday', '-upload_PNG', '-noPDF_out', '-noPNG_out',
     #             '-b', '4', '-ta', '2',
@@ -681,7 +681,7 @@ def single_pulse_thread(src, file, mail, title, stopTime, parset_path='/home/lbo
         mkdir(tmp_dir_new)
 
         if (psredit_length(fits) < 4 * 3600.):
-            #bitsfile = basename.split('.')[0]+'_8bits.fits'
+            # bitsfile = basename.split('.')[0]+'_8bits.fits'
             bitsfile = basename.split('.')[0] + '_rescaled_8bits.fits'
 
             # if( psredit_dstime(fits) < 32 ):
@@ -689,15 +689,15 @@ def single_pulse_thread(src, file, mail, title, stopTime, parset_path='/home/lbo
             #        waiting_for_memory(used_limit=10)
             #        prepare_single_pulses_archive(fits, bitsfile, tmp_dir_new=tmp_dir_new, dstime=2)
             # else:
-            #commande = 'bash /home/mbrionne/Scripts/SinglePulsePipeline/SPpipeline.sh --thres 7.5 --freqsig 3 --timesig 3 --div 256 -f '+fits+' -d '+tmp_dir_new
+            # commande = 'bash /home/mbrionne/Scripts/SinglePulsePipeline/SPpipeline.sh --thres 7.5 --freqsig 3 --timesig 3 --div 256 -f '+fits+' -d '+tmp_dir_new
             commande = 'bash /home/lbondonneau/scripts/pav/psrfits_search/SPpipeline.sh --thres 5.5 --freqsig 3 --timesig 3 --div 1 --ncpus 8 --timefrac 0.2 --freqfrac 0.4 -f ' + fits + ' -d ' + tmp_dir_new
 
-            #commande = 'bash /home/lbondonneau/scripts/Undysputed/PIPELINE/pipeline_quicklooks/single_pulse_test/SPpipeline.sh '+fits+'  '+tmp_dir_new
+            # commande = 'bash /home/lbondonneau/scripts/Undysputed/PIPELINE/pipeline_quicklooks/single_pulse_test/SPpipeline.sh '+fits+'  '+tmp_dir_new
             print(os.path.basename(parset_path) + '  ' + datetime.utcnow().isoformat() + ' :' + commande)
 
-            waiting_for_memory(used_limit=10)
-            if not (DEBUG):
-                output = check_output(commande, shell=True)
+            # waiting_for_memory(used_limit=10)
+            # if not (DEBUG):
+            #     output = check_output(commande, shell=True)
 
             if not fichiers_exist([tmp_dir_new + bitsfile]):
                 waiting_for_memory(used_limit=10)
