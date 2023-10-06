@@ -1,0 +1,122 @@
+# executed by bash(1) for non-login shells.
+
+if [[ $- == *i* ]]; then
+    # Code à exécuter si le shell est en mode interactif
+    PS1='\[\033[01;31m\](Sing_py2)\[\033[00m\] \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    
+    # enable color support of ls and also add handy aliases
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    
+    # colored GCC warnings and errors
+    # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+    
+    # some more ls aliases
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
+    alias emacs='emacs -nw'
+    
+    
+    # append to the history file, don't overwrite it
+    shopt -s histappend
+    
+    # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+    HISTSIZE=; export HISTSIZE # unlimited history list
+    HISTFILESIZE=; export HISTFILESIZE # unlimited history bash file
+    HISTFILE=/home/$USER/.bash_eternal_history; export HISTFILE # change the file location because certain bash sessions truncate .bash_history file upon close
+    HISTCONTROL=ignoreboth; export HISTCONTROL # do not store commands starting from space and duplicates
+    HISTIGNORE='l:ll:lt:ls:bg:fg:mc:history:dwn:uls:data:work:mp3:ls -lah'; export HISTIGNORE # do not store history commands like: ls, bg etc.
+    
+    
+    # don't put duplicate lines in the history. See bash(1) for more options
+    # ... or force ignoredups and ignorespace
+    HISTTIMEFORMAT='%F %T '; export HISTTIMEFORMAT
+    PROMPT_COMMAND='history -a'; export PROMPT_COMMAND # record command into histroy and recall them "as you issue it"
+    
+    # up arrow search
+    bind '"\e[A"':history-search-backward
+    bind '"\e[B"':history-search-forward
+
+fi
+
+# tar a directory with the date to save it
+save() {
+    TARDATE=`date +'D%Y%m%dT%H%M'`
+    DIRTOTAR=`echo "${@}"`
+    TARNAME=`echo "${@}" | cut -d '.' -f1`
+    tar -czvf ./"$TARNAME"_"$TARDATE".tar "$DIRTOTAR"
+}
+
+# reducepdf
+pdfreduction() {
+    OutputFile=`echo "${@}" | cut -d '.' -f1`"_gs.pdf"
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -r400 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$OutputFile "${@}"
+}
+
+# tempo2
+tempo2_plk() {
+    tempo2 -clkdir /usr/local/pulsar/clk_dir/ -gr plk -nspr 1 -nofit -nobs 30000 -f $1 -setup /usr/local/pulsar/plk_setup_fr606_embrace.dat $2
+}
+
+clean_PSR_dm() {
+    PSR=`echo $1`
+    echo 'option for Nenuplot : '$2
+    a=0
+    nthread=10
+    liste=`ls /databf/nenufar-pulsar/DATA/$PSR/PSR/*.fits | cut -d '_' -f2 | sort | uniq`
+    curent_dir=`echo $PWD`
+    for i in $liste; do cd $curent_dir; mkdir $i; cd $i; ln -s /databf/nenufar-pulsar/DATA/$PSR/PSR/$PSR"_"$i*.fits ./; done
+    for i in $liste; do
+    let "a=$a + 1"; let "a=$a % $nthread"; if [ $a -eq $(($nthread - 1)) ]; then wait; fi
+    cd $curent_dir/$i
+    python /cep/lofar/pulsar/NenuPlot_v2.py -metadata_out -maskout -fit_DM $2 -noautorebin -arout *.fits > $i.log &
+    done
+    wait
+    cd $curent_dir
+}
+
+export CHECKOUT_LISTE="psrchive
+dspsr
+tempo
+presto
+psrsalsa
+sigproc
+/usr/local/pulsar/lib/python2.7/site-packages/coast_guard
+RFIClean"
+
+checkout() {
+    original_dir=$(pwd) # Sauvegarde le dossier actuel
+    for dir in $CHECKOUT_LISTE
+    do
+        if [ "${dir:0:1}" = "/" ]; then
+            full_path="$dir"
+        else
+            full_path="$PSRHOME/$dir"
+        fi
+        
+        if [ -d "$full_path" ]; then
+            cd "$full_path" || continue
+            if [ -d ".git" ]; then
+                echo "Directory: $full_path"
+                echo "Checkout: $(git rev-parse HEAD)"
+                echo "DateTime: $(git show -s --format=%ci HEAD)"
+                echo "-------------------"
+            else
+                echo "$full_path n'est pas un dépôt Git."
+                echo "-------------------"
+            fi
+            cd "$original_dir" || return
+        else
+            echo "$full_path n'est pas un dossier valide."
+            echo "-------------------"
+        fi
+    done
+}
+
+
+# if [ -f ~/.bash_singular ]; then
+#     . ~/.bash_singular
+# fi
