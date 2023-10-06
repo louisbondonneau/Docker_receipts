@@ -61,11 +61,6 @@ parset_user_dir_crash = '/home/lbondonneau/parset_crash'
 global tmp_dir
 tmp_dir = '/home/lbondonneau/data/TMP/'
 
-env_path = "/cep/lofar/pulsar/NenuPlot_DIR/python_env"
-environ = os.environ.copy()
-environ["PATH"] = env_path + "/bin:"
-environ["VIRTUAL_ENV"] = env_path
-
 
 def TIME_TO_YYYYMMDD(TIME):
     Y = TIME.split('-')[0].strip()
@@ -643,27 +638,51 @@ def build_folded_archive(bitsfile, tmp_dir_new=tmp_dir):
     return tmp_dir_new + file_name + '_folded.ar'
 
 
+def run_command(cmd, log_file):
+    # Ouvrir le fichier de log en mode 'append'.
+    with open(log_file, 'a') as f:
+        try:
+            # Lancer la commande.
+            result = subprocess.run(cmd, stdout=f, stderr=f, text=True)
+            # text=True fait en sorte que stdout et stderr soient retournés en tant que chaînes de caractères.
+            # Si vous utilisez Python <3.7, utilisez `universal_newlines=True` à la place de `text=True`.
+
+        except Exception as e:
+            # En cas d'exception (par exemple, la commande n'existe pas), écrire l'erreur dans le fichier de log.
+            print(f"Error executing command {cmd}: {str(e)}\n")
+            f.write(f"Error executing command {cmd}: {str(e)}\n")
+
+        else:
+            # Si vous voulez vérifier le code de sortie de la commande.
+            if result.returncode != 0:
+                print(f"Command {cmd} exited with code {result.returncode}\n")
+                f.write(f"Command {cmd} exited with code {result.returncode}\n")
+
+
 def folding_thread(src, file, mail, title, stopTime, parset_path='/home/lbondonneau/OBS/PARSET.parset'):
     """Code à exécuter pendant l'exécution du thread folding_thread."""
     print(os.path.basename(parset_path) + '  ' + datetime.utcnow().isoformat() + ' :' + 'FOLD')
     file = waiting_for_file(file, stopTime, mail, parset_path)
     commande = ['python', '/cep/lofar/pulsar/NenuPlot_v2.py', '-fit_DM', '-defaraday', '-uploadpdf', '-initmetadata', '-nopdf', '-png',
-                '-b', '4', '-ta', '2', '-mailtitle', title, '-mail', '[' + mail[0]]
-    # commande = ['python', '/cep/lofar/pulsar/NenuPlot_DIR/NenuPlot_v4/NenuPlot.py',
-    #             '-u', '/home/lbondonneau/data/TMP/', '-fit_DM', '-fit_RM', '-defaraday', '-upload_PNG', '-noPDF_out', '-noPNG_out',
-    #             '-b', '4', '-ta', '2',
-    #             '-mailtitle', title, '-mail',
-    #             '[' + mail[0]]
+                '-b', '4', '-t', '2', '-mailtitle', title, '-mail', '[' + mail[0]]
+    commande4 = ['python', '/cep/lofar/pulsar/NenuPlot_DIR/NenuPlot_v4/NenuPlot.py',
+                 '-u', '/home/lbondonneau/data/TMP/', '-fit_DM', '-fit_RM', '-defaraday', '-noPDF_out', '-noPNG_out',
+                 '-b', '4', '-t', '2',
+                 '-mailtitle', title, '-mail',
+                 '[louis.bondonneau@obs-nancay.fr] ']
     for i in range(1, len(mail)):
         commande[-1] = commande[-1] + ',' + mail[i]
     commande[-1] = commande[-1] + ']'
     for singlefile in file.split(" "):
         commande.append(singlefile)
+        commande4.append(singlefile)
     print(os.path.basename(parset_path) + '  ' + datetime.utcnow().isoformat() + ' :' + ' '.join(commande))
+    print(os.path.basename(parset_path) + '  ' + datetime.utcnow().isoformat() + ' :' + ' '.join(commande4))
     if(DEBUG):
         exit(0)
     waiting_for_memory(used_limit=20)
-    output = check_output(commande)  # , env=environ)
+    run_command(commande, "/home/lbondonneau/data/TMP/NenuPlot_v2.log")
+    run_command(commande4, "/home/lbondonneau/data/TMP/NenuPlot_v4.log")
 
 
 def single_pulse_thread(src, file, mail, title, stopTime, parset_path='/home/lbondonneau/OBS/PARSET.parset'):
@@ -720,7 +739,7 @@ def single_pulse_thread(src, file, mail, title, stopTime, parset_path='/home/lbo
                 bscrunch = ' -b 2 '
 
             if fichiers_exist([folded_ar]) and (nbin >= 8):
-                #commande = 'python ~/scripts/Undysputed/quicklook_NenuFAR3/NenuPlot.py -defaraday -fit_DM -flat_cleaner -iterative -png  -uploadpdf -metadata_out -u '+tmp_dir_new+' -initmetadata '+bscrunch+folded_ar
+                # commande = 'python ~/scripts/Undysputed/quicklook_NenuFAR3/NenuPlot.py -defaraday -fit_DM -flat_cleaner -iterative -png  -uploadpdf -metadata_out -u '+tmp_dir_new+' -initmetadata '+bscrunch+folded_ar
                 commande = 'python /cep/lofar/pulsar/NenuPlot_v2.py -p -fit_DM -png  -uploadpdf -metadata_out -u ' + tmp_dir_new + ' -initmetadata ' + bscrunch + folded_ar
                 waiting_for_memory(used_limit=20)
                 output = check_output(commande, shell=True)
@@ -822,8 +841,8 @@ while(1):  # (cont < 2):
                 time.sleep(5)
                 mvfile(file_path, parset_user_dir_done)
                 file_path = os.path.join(parset_user_dir_done + '/', the_file)
-            #if not (DEBUG):os.unlink(file_path)
-            #sprint(MODE, SRC, file)
+            # if not (DEBUG):os.unlink(file_path)
+            # sprint(MODE, SRC, file)
             for id_thread in range(len(MODE)):
                 if(MODE[id_thread] == 'FOLD') and not (re.search("--notransfer", PARAM[id_thread])):
                     thread = multiprocessing.Process(target=folding_thread, args=(SRC[id_thread], file[id_thread], MAIL, TITLE, stopTime, file_path))
@@ -838,7 +857,7 @@ while(1):  # (cont < 2):
                     single_thread.join()
                 else:
                     print(os.path.basename(file_path) + '  ' + datetime.utcnow().isoformat() + ' :' + 'OTHER')
-                    #if not (DEBUG):os.unlink(file_path)
+                    # if not (DEBUG):os.unlink(file_path)
         for thread in all_thread:
             thread.join()
         if(DEBUG):
