@@ -34,7 +34,7 @@ From: ubuntu:20.04
     # Preconfigure keyboard-configuration
     echo 'keyboard-configuration keyboard-configuration/layout select French' | debconf-set-selections
 
-    apt -y install build-essential
+    apt -y install build-essential curl
 
     apt -y install python2.7
     # apt -y install python2-dev
