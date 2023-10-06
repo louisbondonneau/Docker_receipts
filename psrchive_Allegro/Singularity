@@ -36,8 +36,7 @@ From: ubuntu:20.04
 
     apt -y install build-essential curl gfortran
 
-    apt -y install python2.7
-    # apt -y install python2-dev
+    apt -y install python2-dev
     curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
     python2.7 get-pip.py
     pip2 install numpy
