@@ -103,6 +103,7 @@ From: ubuntu:20.04
     echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":"$PSRHOME"/lib:"$PRESTO"/lib' >> /etc/bash.bashrc
     echo 'export C_INCLUDE_PATH="$C_INCLUDE_PATH":"$PSRHOME"/include:"$PSRHOME"/tempo2/include' >> /etc/bash.bashrc
     echo 'export PATH="$PATH":$PRESTO/bin' >> /etc/bash.bashrc
+    echo 'export PATH="$PATH":$HOME/bin' >> /etc/bash.bashrc
     echo 'export TEMPO2="$PSRHOME"/tempo2' >> /etc/bash.bashrc
     echo 'export TEMPO="$PSRHOME"/tempo' >> /etc/bash.bashrc
     echo 'export PSRCAT_FILE="$PSRHOME"/psrcat/psrcat.db' >> /etc/bash.bashrc

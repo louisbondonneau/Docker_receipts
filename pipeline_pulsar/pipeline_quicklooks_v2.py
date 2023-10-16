@@ -195,6 +195,8 @@ def decode_parset_user(pathto):
                 #   MODE=line.split('"')[1].split('_')[1].rstrip()
                 if (re.search("target=", line)):
                     AlltargetList[BEAM] = [line.split('"')[1].split('_')[0].strip()]
+                if (re.search("toDo=TBD", line)):
+                    AllmodeList[BEAM] = ['TBD']
                 if (re.search("parameters=", line)):
                     if not (line[len(line.strip()) - 1] == '='):  # if parameters is not empti
                         # print(line.strip('"'))
@@ -287,6 +289,10 @@ def decode_parset_user(pathto):
                         + AlltargetList[BEAM][0]
                         + '_D' + TIME_TO_YYYYMMDD(AllstartTime[BEAM][0])
                         + '*BEAM' + str(BEAM) + '.fits')
+        elif (AllmodeList[BEAM][0] == 'TBD'):
+            print(os.path.basename(pathto) + '  ' + datetime.utcnow().isoformat() + ' :' +
+                  '-----------------------TBD--MODE--BEAM-' + str(BEAM) + '-------------------')
+            file.append('')
         else:
             print(os.path.basename(pathto) + '  ' + datetime.utcnow().isoformat() + ' :' +
                   '-----------------------FAKE--MODE--BEAM-' + str(BEAM) + '-------------------')
@@ -303,10 +309,6 @@ def decode_parset_user(pathto):
             if (index >= len(MODE)) or (indey >= len(MODE)):
                 continue
             if ((int(maxchan[index]) + 1 == int(minchan[indey])) or (int(maxchan[indey]) + 1 == int(minchan[index]))) and (MODE[index] == MODE[indey]) and (SRC[index] == SRC[indey]) and (RAd[index] == RAd[indey]):
-                #freqappend is possible
-                # print(index)
-                #print(MODE[index], MODE[indey])
-                # print(file)
                 if (MODE[index] == 'FOLD') or (MODE[index] == 'SINGLE'):
                     file[index] = file[index] + ' ' + file[indey]
                     file.pop(indey)
@@ -316,6 +318,18 @@ def decode_parset_user(pathto):
                     SRC.pop(indey)
                     RAd.pop(indey)
                     DECd.pop(indey)
+                    PARAM.pop(indey)
+    for index in range(len(MODE)-1, -1, -1):
+        if (MODE[index] == 'TBD'):
+            file.pop(index)
+            minchan.pop(index)
+            maxchan.pop(index)
+            MODE.pop(index)
+            SRC.pop(index)
+            RAd.pop(index)
+            DECd.pop(index)
+            PARAM.pop(index)
+
     MAIL = title_to_mail(TITLE)
     return MAIL, TITLE, MODE, PARAM, SRC, file, stopTime
 
@@ -689,6 +703,9 @@ def single_pulse_thread(src, file, mail, title, stopTime, parset_path='/home/lbo
     """Code à exécuter pendant l'exécution du thread single_pulse_thread."""
     print(os.path.basename(parset_path) + '  ' + datetime.utcnow().isoformat() + '  :' + 'SINGLE')
     file = waiting_for_file(file, stopTime, mail, parset_path)
+    exit()
+
+
     out_file = ''
     for fits in file.split(' '):
         basename = os.path.basename(fits)
