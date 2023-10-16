@@ -33,6 +33,10 @@ From: ubuntu:20.04
     pip3 install widgetsnbextension --upgrade
     pip3 install jupyter
 
+    add-apt-repository ppa:deadsnakes/ppa
+    apt update
+    apt -y install python3.11 python3.11-distutils python3.11-venv
+
     ln -s /usr/bin/python3.8 /usr/bin/python
 
     export PSRHOME=/usr/local/pulsar
