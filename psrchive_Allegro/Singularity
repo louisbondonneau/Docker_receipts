@@ -149,7 +149,23 @@ From: ubuntu:20.04
 %post
     cd $PSRHOME && \
         git config --global http.postBuffer 524288000
-        git clone http://git.code.sf.net/p/psrchive/code psrchive
+
+        MAX_ATTEMPTS=5
+        COUNT=0
+    
+        while [ $COUNT -lt $MAX_ATTEMPTS ]; do
+            git clone http://git.code.sf.net/p/psrchive/code psrchive || true
+
+            # Vérifiez si le clone a réussi
+            if [ -d "psrchive" ]; then
+                break
+            fi
+    
+            # Si le git clone échoue, attendez 2 minutes puis réessayez
+            echo "Tentative de git clone a échoué. Attendre 5 minutes avant de réessayer..."
+            sleep 300
+            COUNT=$((COUNT+1))
+        done
 
     cd $PSRHOME/psrchive && \
         git checkout master && \
