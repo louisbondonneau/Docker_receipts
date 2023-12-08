@@ -11,7 +11,9 @@ From: alpine:latest
 
     # Création d'un utilisateur pour GitLab Runner
     adduser -D -g '' gitlab-runner
-    su gitlab-runner -c "gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner"
+
+    # Installer GitLab Runner sans l'option --user
+    su gitlab-runner -c "gitlab-runner install --working-directory=/home/gitlab-runner"
 
 %startscript
     su gitlab-runner -c "gitlab-runner start"
