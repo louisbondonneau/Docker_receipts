@@ -3,7 +3,7 @@ From: alpine:latest
 
 %post
     # Mise à jour et installation des paquets nécessaires
-    apk update && apk add bash ca-certificates git openssl openssh-client
+    apk update && apk add bash ca-certificates git openssl openssh-client openrc
 
     # Installation de GitLab Runner
     wget -O /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
@@ -19,3 +19,24 @@ From: alpine:latest
 
 %runscript
     su gitlab-runner -c "gitlab-runner run"
+
+
+
+(16/19) Installing libedit (20230828.3.1-r3)
+(17/19) Installing openssh-client-common (9.5_p1-r0)
+(18/19) Installing openssh-client-default (9.5_p1-r0)
+(19/19) Installing openssl (3.1.4-r2)
+Executing busybox-1.36.1-r15.trigger
+Executing ca-certificates-20230506-r0.trigger
+OK: 26 MiB in 34 packages
++ wget -O /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+Connecting to gitlab-runner-downloads.s3.amazonaws.com (3.5.19.180:443)
+saving to '/usr/local/bin/gitlab-runner'
+gitlab-runner        100% |*****************************************************************************************************************************************************************************| 62.2M  0:00:00 ETA
+'/usr/local/bin/gitlab-runner' saved
++ chmod +x /usr/local/bin/gitlab-runner
++ adduser -D -g  gitlab-runner
++ gitlab-runner install '--user=gitlab-runner' '--working-directory=/home/gitlab-runner'
+Runtime platform                                    arch=amd64 os=linux pid=217 revision=f5da3c5a version=16.6.1
+FATAL: Failed to install gitlab-runner: "rc-update" failed: exec: "rc-update": executable file not found in $PATH
+FATAL:   While performing build: while running engine: exit status 1
