@@ -2,8 +2,13 @@ Bootstrap: docker
 From: alpinelinux/gitlab-runner
 
 %post
-    # Installer bash
-    apk add --no-cache bash
+    # Mise à jour des référentiels de paquets et installation des outils essentiels
+    apk update
+    apk add --no-cache bash git curl ca-certificates
+
+    # Nettoyage du cache du gestionnaire de paquets pour réduire la taille de l'image
+    rm -rf /var/cache/apk/*
+
 
 %startscript
     gitlab-runner start
