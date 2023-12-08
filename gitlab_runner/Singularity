@@ -1,21 +1,8 @@
 Bootstrap: docker
-From: alpine:latest
-
-%post
-    # Mise à jour et installation des paquets nécessaires
-    apk update && apk add bash ca-certificates git openssl openssh-client openrc
-
-    # Installation de GitLab Runner
-    wget -O /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
-    chmod +x /usr/local/bin/gitlab-runner
-
-    # Création d'un utilisateur pour GitLab Runner
-    adduser -D -g '' gitlab-runner
-
-    gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+From: alpinelinux/gitlab-runner
 
 %startscript
-    su gitlab-runner -c "gitlab-runner start"
+    gitlab-runner start
 
 %runscript
-    su gitlab-runner -c "gitlab-runner run"
+    gitlab-runner run
