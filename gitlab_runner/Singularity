@@ -4,7 +4,7 @@ From: alpinelinux/gitlab-runner
 %post
     # Mise à jour des référentiels de paquets et installation des outils essentiels
     apk update
-    apk add --no-cache bash git curl ca-certificates docker
+    apk add --no-cache bash git curl ca-certificates openrc docker
 
     # Nettoyage du cache du gestionnaire de paquets pour réduire la taille de l'image
     rm -rf /var/cache/apk/*
@@ -12,7 +12,7 @@ From: alpinelinux/gitlab-runner
 
 %startscript
     # Start Docker daemon
-    service docker start
+    rc-service docker start
 
     # Start GitLab Runner
     gitlab-runner start
