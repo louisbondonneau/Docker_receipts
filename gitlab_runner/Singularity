@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: docker/24.0.7-dind
+From: docker:24.0.7-dind
 
 %post
     # Mise à jour des référentiels de paquets et installation des outils essentiels
