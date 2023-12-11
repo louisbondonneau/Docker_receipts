@@ -12,7 +12,8 @@ From: alpinelinux/gitlab-runner
 
 %startscript
     # Start Docker daemon
-    rc-service docker start
+    # rc-service docker start
+    dockerd
 
     # Start GitLab Runner
     gitlab-runner start
