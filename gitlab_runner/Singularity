@@ -4,16 +4,20 @@ From: docker:24.0.7-dind-rootless
 %post
     # Mise à jour des référentiels de paquets et installation des outils essentiels
     apk update
-    apk add --no-cache bash git curl gitlab-runner ca-certificates
+    apk add --no-cache bash git curl gitlab-runner ca-certificates sudo
+
+    # Ajouter un utilisateur spécifique pour les opérations sudo (optionnel)
+    adduser mon_utilisateur --disabled-password
+    echo "mon_utilisateur ALL=(ALL) NOPASSWD: /usr/bin/dockerd" >> /etc/sudoers
 
     # Nettoyage du cache du gestionnaire de paquets pour réduire la taille de l'image
     rm -rf /var/cache/apk/*
 
 
 %startscript
-    # Start Docker daemon
-    # rc-service docker start
-    dockerd
+    # Démarrer le démon Docker avec sudo si nécessaire
+    su mon_utilisateur
+    sudo dockerd
 
     # Start GitLab Runner
     gitlab-runner start
