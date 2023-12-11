@@ -4,19 +4,24 @@ From: alpinelinux/gitlab-runner
 %post
     # Mise à jour des référentiels de paquets et installation des outils essentiels
     apk update
-    apk add --no-cache bash git curl ca-certificates
+    apk add --no-cache bash git curl ca-certificates docker
 
     # Nettoyage du cache du gestionnaire de paquets pour réduire la taille de l'image
     rm -rf /var/cache/apk/*
 
 
 %startscript
+    # Start Docker daemon
+    service docker start
+
+    # Start GitLab Runner
     gitlab-runner start
 
 %runscript
     gitlab-runner run
 
+# Build, Shell, Register, and Run commands
 # singularity build gitlab-runner.sif Singularity
 # singularity shell gitlab-runner.sif
-# 	gitlab-runner register (FILL WITH URL AND TOKEN)
-# 	gitlab-runner run
+#   gitlab-runner register (FILL WITH URL AND TOKEN)
+#   gitlab-runner run
