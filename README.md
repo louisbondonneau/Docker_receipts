@@ -19,6 +19,7 @@ Run a contaner
 | SIGPROC            | OK             | OK             |
 | RFICLEAN           | OK             | OK             |
 | GPTOOL             | OK             | OK             |
+| PlotX/TransientX   | NOK            | OK             |
 | pylib - nenupy     | OK (py3)       | OK (py3)       |
 | pylib - AntPat     | OK (py3)       | OK (py3)       |
 | pylib - dreamBeam  | OK (py3)       | OK (py3)       |
