@@ -17,4 +17,6 @@ mv $DEST/ftp.astron.nl/outgoing/Measures/*.ztar $DEST
 rm -r $DEST/ftp.astron.nl
 
 cd $DEST
-for i in *.ztar; do tar -xzvf $i; done
+for i in *.ztar; do
+    tar -xzvf "$i" || echo "Error extracting $i, possibly corrupted file."
+done
