@@ -111,6 +111,12 @@ From: ubuntu:20.04
     echo 'export PATH=${PATH}:"$PSRHOME"/bin:"$TEMPO2"/bin' >> /etc/bash.bashrc
     echo 'export PYTHONPATH="$PYTHONPATH":$PRESTO/lib/python' >> /etc/bash.bashrc
 
+#####  SurrealDB  #####
+%post
+    curl -sSf https://install.surrealdb.com | sh
+    wget https://github.com/StarlaneStudios/Surrealist/releases/download/v1.11.4/surrealist-v1.11.4-linux.deb
+    dpkg -i surrealist-v1.11.4-linux.deb
+
 #####  TEMPO2  #####
 %post
     . /etc/bash.bashrc && \
