@@ -26,6 +26,7 @@ Run a contaner
 | pylib - psrqpy     | OK (py3)       | OK (py3)       |
 | pylib - clean.py   | OK (py2)       | NOK            |
 | pylib - pyqt5      | OK (py3)       | OK (py3)       |
+| pylib - pyglow     | NOK            | OK (py3)       |
 
 
 ### RUN pschive_py2 container

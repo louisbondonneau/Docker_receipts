@@ -287,6 +287,14 @@ From: ubuntu:20.04
     cd $PSRHOME/src/dreamBeam
     python3 setup.py install
 
+#####  PYGLOW  #####
+%post
+    cd $PSRHOME/src
+    git clone https://github.com/timduly4/pyglow.git pyglow
+    cd $PSRHOME/src/pyglow
+    make -C src/pyglow/models source
+    python3 setup.py install
+
 #####  sofa/PlotX/TransientX  #####
 # %post
 #     ## sofa
