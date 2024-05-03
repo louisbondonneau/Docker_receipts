@@ -5,6 +5,7 @@ From: ubuntu:20.04
 %post
     GIT_PSRCHIVE_TAG="d706adce0b3faeeb7caa4dbb3f365e59dd06b299"
     GIT_DSPSR_TAG="879158a8e98a1ffbe99aa6cd06ea57a30508df79"
+    GIT_PRESTO_TAG="v4.0"
 
 %files
     config/bashrc
@@ -23,7 +24,7 @@ From: ubuntu:20.04
     apt update && apt -y upgrade
     apt -y install python3-pyqt5 python3-pyqt5.qtwebengine
     apt -y install python3-tk
-    apt -y install build-essential manpages-dev htop wget tmux rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-bin libfftw3-dev libfftw3-single3 libfftw3-mpi-dev libgsl-dev pgplot5 python3-pip csh tcsh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin nvidia-cuda-toolkit firefox imagemagick gnuplot s-nail
+    apt -y install build-essential manpages-dev htop wget tmux rsync locate git curl autotools-dev autoconf libtool make g++ gfortran libfftw3-dev libfftw3-single3 libfftw3-mpi-dev libgsl-dev pgplot5 python3-pip csh tcsh swig python-tk pkg-config x11-apps gedit ghostscript libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin nvidia-cuda-toolkit firefox imagemagick gnuplot s-nail
     apt -y install bc libboost-all-dev f2c
 
     pip3 install numpy==1.21
@@ -89,7 +90,7 @@ From: ubuntu:20.04
     export PRESTO="$PSRHOME"/presto
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":"$PSRHOME"/lib:"$PRESTO"/lib
     export C_INCLUDE_PATH="$C_INCLUDE_PATH":"$PSRHOME"/include:"$PSRHOME"/tempo2/include
-    # export PATH="$PATH":$PRESTO/bin
+    export PATH="$PATH":$PRESTO/bin
     export TEMPO2="$PSRHOME"/tempo2
     export TEMPO="$PSRHOME"/tempo
     export PSRCAT_FILE="$PSRHOME"/psrcat/psrcat.db
@@ -104,7 +105,7 @@ From: ubuntu:20.04
     echo 'export PRESTO="$PSRHOME"/presto' >> /etc/bash.bashrc
     echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":"$PSRHOME"/lib:"$PRESTO"/lib' >> /etc/bash.bashrc
     echo 'export C_INCLUDE_PATH="$C_INCLUDE_PATH":"$PSRHOME"/include:"$PSRHOME"/tempo2/include' >> /etc/bash.bashrc
-    # echo 'export PATH="$PATH":$PRESTO/bin' >> /etc/bash.bashrc
+    echo 'export PATH="$PATH":$PRESTO/bin' >> /etc/bash.bashrc
     echo 'export TEMPO2="$PSRHOME"/tempo2' >> /etc/bash.bashrc
     echo 'export TEMPO="$PSRHOME"/tempo' >> /etc/bash.bashrc
     echo 'export PSRCAT_FILE="$PSRHOME"/psrcat/psrcat.db' >> /etc/bash.bashrc
@@ -185,23 +186,21 @@ From: ubuntu:20.04
 
 #####  PRESTO  #####
 %post
-    pip3 install meson meson-python ninja
     apt-get install -y libpng-dev libx11-dev libglib2.0-dev mpich openmpi-bin
     cd $PSRHOME
     git clone https://github.com/scottransom/presto presto
     cd $PSRHOME/presto/
+    git checkout master
+    git checkout $GIT_PRESTO_TAG
     . /etc/bash.bashrc
-    meson setup build --prefix=$PSRHOME
-    python check_meson_build.py
-    meson compile -C build
-    meson install -C build
-
-    cd $PRESTO/python
-    pip3 install --config-settings=builddir=build .
-
-    cd $PRESTO/build/src
+    cd $PRESTO/src
     make makewisdom
-    cp fftw_wisdom.txt $PRESTO/lib/
+    make clean
+    make prep
+    make
+
+    cd $PRESTO && \
+        pip3 install ./
 
 ##### SIGPROC #####
 %post
